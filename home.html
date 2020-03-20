@@ -14,43 +14,55 @@
 	<section>
 		<table class="custom-table">
 			<tr>
-				<th colspan="2">
+				<th colspan="5">
 					<img class="banner" src="img.jpg" alt="clouds">
 				</th>
 			</tr>
 			<form id="form" method="POST">
 				<tr>
-					<td>
-						<label for="departure">Departure:</label><input type="date" name="departure" id="departure" placeholder="dd.mm.yyyy">
+					<td colspan="2">
+						<label for="departure">Departure:</label>
 					</td>
 					<td>
+						<input type="date" name="departure" id="departure" placeholder="dd.mm.yyyy">
+					</td>
+					<td class="radio-wrapper">
 						<input type="radio" id="airport1" name="d-airport" value="Rome" checked>
 						<label for="airport1">Rome</label> 
+					</td>
+					<td class="radio-wrapper">
 						<input type="radio" id="airport2" name="d-airport" value="Milan">
 						<label for="airport2">Visa</label>
 					</td>
 				</tr>
 				<tr>
-					<td>
-						<label for="return">Return:</label><input type="date" name="return" id="return" placeholder="dd.mm.yyyy">
+					<td colspan="2">
+						<label for="return">Return:</label>
 					</td>
 					<td>
+						<input type="date" name="return" id="return" placeholder="dd.mm.yyyy">
+					</td>
+					<td class="radio-wrapper">
 						<input type="radio" id="airport1" name="r-airport" value="Rome">
 						<label for="airport1">Rome</label> 
+					</td>
+					<td class="radio-wrapper">
 						<input type="radio" id="airport2" name="r-airport" value="Milan">
 						<label for="airport2">Visa</label>
 					</td>
 				</tr>
 				<tr>
-					<td>
+					<td colspan="2">
 						<label for="carrier">Carrier:</label>
+					</td>
+					<td>
 						<select name="carrier">
 							<option selected>Alitalia</option>
 							<option>Carrier 2</option>
 							<option>Carrier 3</option>
 						</select>
 					</td>
-					<td>
+					<td colspan="2">
 						<label for="direct">
 							<input type="checkbox" name="direct" value="direct" checked>
 							Direct connection only
@@ -58,8 +70,10 @@
 					</td>
 				</tr>
 				<tr>
-					<td>
+					<td colspan="2">
 						<label for="persons">Persons:</label>
+					</td>
+					<td>
 						<select name="persons">
 							<option>1</option>
 							<option>2</option>
@@ -71,6 +85,8 @@
 					</td>
 					<td>
 						<label for="class">Class:</label>
+					</td>
+					<td>
 						<select name="class">
 							<option selected>Economy</option>
 							<option>Business</option>
@@ -79,39 +95,49 @@
 					</td>
 				</tr>
 				<tr>
+					<td></td>
 					<td>
-						<label for="name">Name:</label> 
+						<label for="name">Name</label> 
+					</td>
+					<td>
 						<input type="text" name="name" id="name" maxlength="30">
 					</td>
 					<td>
-						<label for="surname">Surname:</label> 
+						<label for="surname">Surname</label> 
+					</td>
+					<td>
 						<input type="text" name="surname" id="surname">
 					</td>
 				</tr>
 				<tr>
+					<td></td>
 					<td>
-						<label for="email">Email:</label> 
+						<label for="email">Email</label> 
+					</td>
+					<td colspan="3">
 						<input type="email" name="email" id="email" maxlength="56" placeholder="email@hostname.it">
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2">
-						<label for="comments">Personal data:</label>
-						<textarea name="comments" class="comments" placeholder="Comments" cols="52" rows="5"></textarea>
+					<td class="va-top">
+						<label for="comments">Personal data</label>
+					</td>
+					<td colspan="4">
+						<textarea name="comments" id="comments" placeholder="Comments:" cols="52" rows="5"></textarea>
 					</td>
 				</tr>
 				<tr>
-					<td>				
+					<td colspan="3">				
 						<button form="form" type="submit">Submit</button>
 					</td>
-					<td>
+					<td colspan="2">
 						<button form="form" type="reset">Reset</button>
 					</td>
 				</tr>
 			</form>
 		</table>
 	</section>
-	<aside>
+	<aside class="va-top">
 		<table class="table-news blue-border">
 			<tr><th>News</th></tr>
 			<tr><td>Morbi dignissim pulvinar tempus. Nullam eu lorem sit amet mi lobortis auctor. Donec vitae placerat justo. Quisque eu viverra dolor, ut blandit leo. Donec quis ante a turpis placerat tempus in non mauris. Sed blandit quam nulla, non iaculis massa blandit in.</td></tr>

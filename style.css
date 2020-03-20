@@ -1,3 +1,4 @@
+/* general things */
 body {
     width: 750px !important;
     display: inline;
@@ -9,15 +10,25 @@ header {
     background-image: url(clouds.jpg);
     background-repeat: repeat-x;
 }
+footer {
+    text-align: center;
+    color: white;
+    background-color: blue;
+    width: inherit;
+}
 .blue-border {
     border: 1px solid blue;
 }
+.va-top {
+    vertical-align: top;
+}
+
+/* element styling */
 section, aside {
     display: inline-block;
 }
 aside {
     width: 228px;
-    vertical-align: top;
 }
 .custom-table {
     width: 520px;
@@ -25,6 +36,9 @@ aside {
 .banner {
     height: 250px;
     width: 100%;
+}
+.table-news {
+    margin-left: 10px;
 }
 .table-news th {
     color: white;
@@ -36,12 +50,19 @@ aside {
 label {
     width: 20px;
 }
-footer {
-    text-align: center;
-    color: white;
-    background-color: blue;
-    width: inherit;
-}
-.comments {
+#comments {
     max-width: 520px;
+}
+#name, #surname {
+    max-width: 150px;
+    margin-right: 4px;
+}
+#email {
+    width: 300px;
+}
+.radio-wrapper {
+    min-width: 75px;
+}
+#return, #departure {
+    max-width: 135px;
 }
