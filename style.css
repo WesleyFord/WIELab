@@ -36,3 +36,9 @@ aside {
 label {
     width: 20px;
 }
+footer {
+    text-align: center;
+    color: white;
+    background-color: blue;
+    width: inherit;
+}
