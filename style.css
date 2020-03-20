@@ -1,0 +1,38 @@
+body {
+    width: 750px !important;
+    display: inline;
+    color: blue;
+}
+header {
+    height: 90px;
+    width: inherit;
+    background-image: url(clouds.jpg);
+    background-repeat: repeat-x;
+}
+.blue-border {
+    border: 1px solid blue;
+}
+section, aside {
+    display: inline-block;
+}
+aside {
+    width: 228px;
+    vertical-align: top;
+}
+.custom-table {
+    width: 520px;
+}
+.banner {
+    height: 250px;
+    width: 100%;
+}
+.table-news th {
+    color: white;
+    background-color: blue;
+    font-weight: bold;
+    border: 1px solid white;
+    text-align: left;
+}
+label {
+    width: 20px;
+}
