@@ -42,3 +42,6 @@ footer {
     background-color: blue;
     width: inherit;
 }
+.comments {
+    max-width: 520px;
+}
