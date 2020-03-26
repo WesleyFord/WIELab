@@ -22,6 +22,9 @@ footer {
 .va-top {
     vertical-align: top;
 }
+.hide {
+    display: none;
+}
 
 /* element styling */
 section, aside {

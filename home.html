@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="author" content="">
@@ -12,19 +12,20 @@
 <body>
 	<header class="blue-border"></header>
 	<section>
-		<table class="custom-table">
-			<tr>
-				<th colspan="5">
-					<img class="banner" src="img.jpg" alt="clouds">
-				</th>
-			</tr>
-			<form id="form" method="POST">
+		<h2 class="hide">Headline to avoid warning</h2>
+		<form id="form" method="POST">
+			<table class="custom-table">
+				<tr>
+					<th colspan="5">
+						<img class="banner" src="img.jpg" alt="clouds">
+					</th>
+				</tr>
 				<tr>
 					<td colspan="2">
 						<label for="departure">Departure:</label>
 					</td>
 					<td>
-						<input type="date" name="departure" id="departure" placeholder="dd.mm.yyyy">
+						<input type="text" name="departure" id="departure" placeholder="dd.mm.yyyy">
 					</td>
 					<td class="radio-wrapper">
 						<input type="radio" id="airport1" name="d-airport" value="Rome" checked>
@@ -40,15 +41,15 @@
 						<label for="return">Return:</label>
 					</td>
 					<td>
-						<input type="date" name="return" id="return" placeholder="dd.mm.yyyy">
+						<input type="text" name="return" id="return" placeholder="dd.mm.yyyy">
 					</td>
 					<td class="radio-wrapper">
-						<input type="radio" id="airport1" name="r-airport" value="Rome">
-						<label for="airport1">Rome</label> 
+						<input type="radio" id="airport3" name="r-airport" value="Rome">
+						<label for="airport3">Rome</label> 
 					</td>
 					<td class="radio-wrapper">
-						<input type="radio" id="airport2" name="r-airport" value="Milan">
-						<label for="airport2">Visa</label>
+						<input type="radio" id="airport4" name="r-airport" value="Milan">
+						<label for="airport4">Visa</label>
 					</td>
 				</tr>
 				<tr>
@@ -56,7 +57,7 @@
 						<label for="carrier">Carrier:</label>
 					</td>
 					<td>
-						<select name="carrier">
+						<select id="carrier" name="carrier">
 							<option selected>Alitalia</option>
 							<option>Carrier 2</option>
 							<option>Carrier 3</option>
@@ -64,7 +65,7 @@
 					</td>
 					<td colspan="2">
 						<label for="direct">
-							<input type="checkbox" name="direct" value="direct" checked>
+							<input type="checkbox" name="direct" id="direct" value="direct" checked>
 							Direct connection only
 						</label>
 					</td>
@@ -74,7 +75,7 @@
 						<label for="persons">Persons:</label>
 					</td>
 					<td>
-						<select name="persons">
+						<select id="persons" name="persons">
 							<option>1</option>
 							<option>2</option>
 							<option>3</option>
@@ -87,7 +88,7 @@
 						<label for="class">Class:</label>
 					</td>
 					<td>
-						<select name="class">
+						<select id="class" name="class">
 							<option selected>Economy</option>
 							<option>Business</option>
 							<option>First</option>
@@ -134,8 +135,8 @@
 						<button form="form" type="reset">Reset</button>
 					</td>
 				</tr>
-			</form>
-		</table>
+			</table>
+		</form>
 	</section>
 	<aside class="va-top">
 		<table class="table-news blue-border">
