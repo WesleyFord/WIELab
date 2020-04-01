@@ -69,3 +69,17 @@ label {
 #return, #departure {
     max-width: 135px;
 }
+
+/* Animation */
+header #plane {
+    position: relative;
+    animation-name: fly;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes fly {
+    from {right: 0px}
+    to {right: 546px; transform:rotate(180deg)}
+}
