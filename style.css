@@ -70,6 +70,9 @@ label {
     max-width: 135px;
 }
 
+#plane {
+    float: right;
+}
 /* Animation */
 header #plane {
     position: relative;
