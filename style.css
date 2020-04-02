@@ -77,12 +77,14 @@ label {
 header #plane {
     position: relative;
     animation-name: fly;
-    animation-duration: 5s;
+    animation-duration: 10s;
     animation-iteration-count: infinite;
-    animation-direction: alternate;
 }
 
 @keyframes fly {
-    from {right: 0px}
-    to {right: 546px; transform:rotate(180deg)}
+    0% {right: 0px}
+    40% {right: 546px; transform:rotateY(0deg)}
+    50% {right: 546px; transform:rotateY(180deg)}
+    90% {right: 0px; transform:rotateY(180deg)}
+    100% {right: 0px}
 }
