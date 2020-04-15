@@ -7,7 +7,6 @@
 		<meta name="description" content="Web and Internet Engineering Assignment 3">
 		<meta name="author" content="Riccardo Billero">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-		<link href="style.css" rel="stylesheet">
 		<title>Order ticket</title>
 	</head>
 	<body>
@@ -18,8 +17,8 @@
 				<form class="col-12">
 					<div class="row">
 						<div class="col-12 col-sm-6 mt-4">
-							<label class="col-12 pl-0 pr-0" for="calendar">Date of concert:</label> 
-							<select class="col-12"	name="calendar">
+							<label class="col-12 px-0" for="calendar">Date of concert:</label> 
+							<select class="col form-control"	name="calendar">
 								<option value="">Select a date</option>
 								<option>01.04.2020</option>
 								<option>02.04.2020</option>
@@ -31,47 +30,72 @@
 						</div>
 						
 						<div class="col-12 col-sm-6 mt-4">
-							<label class="col-12 pl-0 pr-0" for="location">Location</label> 
-							<input id="bolzano"
-								name="location" type="radio"> <label
-								for="bolzano">Bolzano/Bozen</label> <input id="merano"
-								name="location" type="radio"> <label
+							<label class="col px-0" for="location">Location</label> 
+							<input id="bolzano form-control"
+								name="location" type="radio"> 
+							<label class="mr-3"
+								for="bolzano">Bolzano/Bozen</label> 
+							<input id="merano form-control"
+								name="location" type="radio"> 
+							<label
 								for="merano">Merano/Meran</label>
 						</div>
 					</div>
-
-					<div>
-						<label for="firstName">First name</label> <input type="text"
-							id="firstName" placeholder="" value=""> <label
-							for="lastName">Last name</label> <input type="text" id="lastName"
+					
+					<div class="row">
+						<div class="col-12 col-sm-6 mt-3">
+							<label class="col px-0" for="firstName">First name</label> 
+							<input class="col form-control" type="text"
+							id="firstName" placeholder="" value=""> 
+						</div>
+						<div class="col-12 col-sm-6 mt-3">
+							<label class="col px-0"
+							for="lastName">Last name</label> 
+							<input class="col form-control" type="text" id="lastName"
 							placeholder="" value="">
+						</div>	
 					</div>
 
 
-					<div>
-						<div>
-							<label for="email">Email</label> <input type="email" id="email"
+					<div class="row">
+						<div class="col mt-3">
+							<label class="col px-0" for="email">Email</label> 
+							<input class="col form-control" type="email" id="email"
 								placeholder="youremail@example.com">
 						</div>
 					</div>
 
-					<div>
-						<label for="country">Country</label> <select id="country">
-							<option value="">Select you country</option>
-							<option>Deutschland</option>
-							<option>France</option>
-							<option>Italia</option>
-							<option>United Kingdom</option>
-							<option>United States</option>
-						</select> <label for="state">City</label> <input id="city" placeholder="">
-						<label for="zip">Zip</label> <input type="text" id="zip"
-							placeholder="">
+					<div class="row">
+						<div class="col-12 col-sm-5 mt-3">
+							<label class="col px-0" for="country">Country</label> 
+							<select class="col form-control" id="country">
+								<option value="">Select you country</option>
+								<option>Deutschland</option>
+								<option>France</option>
+								<option>Italia</option>
+								<option>United Kingdom</option>
+								<option>United States</option>
+							</select> 
+						</div>
+						<div class="col-12 col-sm-4 mt-3">
+							<label class="col px-0" for="state">City</label> 
+							<input class="col form-control" id="city" placeholder="">
+						</div>
+						<div class="col-12 col-sm-3 mt-3">
+							<label class="col px-0" for="zip">Zip</label> 
+							<input class="col form-control" type="text" id="zip"
+								placeholder="">
+						</div>
 					</div>
 
 					<hr>
-					<div>
-						<button type="submit">Send</button>
-						<button type="reset">Reset</button>
+					<div class="row">
+						<div class="col-6 col-sm-2">
+							<button class="col btn btn-success" type="submit">Send</button>
+						</div>
+						<div class="col-6 col-sm-2">
+							<button class="col btn btn-danger" type="reset">Reset</button>
+						</div>
 					</div>
 				</form>
 			</div>
