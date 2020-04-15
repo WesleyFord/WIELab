@@ -1,78 +1,87 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Web and Internet Engineering Assignment 3">
-<meta name="author" content="Riccardo Billero">
-<title>Order ticket</title>
-</head>
-<body>
-	<div>
-		<div>
-			<h2>Order ticket</h2>
-			<img src="concert.png">
-			<form>
-				<div>
-					<label for="calendar">Date of concert:</label> <select
-						name="calendar">
-						<option value="">Select a date</option>
-						<option>01.04.2020</option>
-						<option>02.04.2020</option>
-						<option>03.04.2020</option>
-						<option>04.04.2020</option>
-						<option>05.04.2020</option>
-						<option>06.04.2020</option>
-					</select>
-					<div>
-						<label for="location">Location</label> <input id="bolzano"
-							name="location" type="radio"> <label
-							for="bolzano">Bolzano/Bozen</label> <input id="merano"
-							name="location" type="radio"> <label
-							for="merano">Merano/Meran</label>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="Web and Internet Engineering Assignment 3">
+		<meta name="author" content="Riccardo Billero">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<link href="style.css" rel="stylesheet">
+		<title>Order ticket</title>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+				<h2 class="col-12">Order ticket</h2>
+				<img class="col-12 d-none d-sm-block" src="concert.png">
+				<form class="col-12">
+					<div class="row">
+						<div class="col-12 col-sm-6 mt-4">
+							<label class="col-12 pl-0 pr-0" for="calendar">Date of concert:</label> 
+							<select class="col-12"	name="calendar">
+								<option value="">Select a date</option>
+								<option>01.04.2020</option>
+								<option>02.04.2020</option>
+								<option>03.04.2020</option>
+								<option>04.04.2020</option>
+								<option>05.04.2020</option>
+								<option>06.04.2020</option>
+							</select>
+						</div>
+						
+						<div class="col-12 col-sm-6 mt-4">
+							<label class="col-12 pl-0 pr-0" for="location">Location</label> 
+							<input id="bolzano"
+								name="location" type="radio"> <label
+								for="bolzano">Bolzano/Bozen</label> <input id="merano"
+								name="location" type="radio"> <label
+								for="merano">Merano/Meran</label>
+						</div>
 					</div>
-				</div>
 
-				<div>
-					<label for="firstName">First name</label> <input type="text"
-						id="firstName" placeholder="" value=""> <label
-						for="lastName">Last name</label> <input type="text" id="lastName"
-						placeholder="" value="">
-				</div>
-
-
-				<div>
 					<div>
-						<label for="email">Email</label> <input type="email" id="email"
-							placeholder="youremail@example.com">
+						<label for="firstName">First name</label> <input type="text"
+							id="firstName" placeholder="" value=""> <label
+							for="lastName">Last name</label> <input type="text" id="lastName"
+							placeholder="" value="">
 					</div>
-				</div>
 
-				<div>
-					<label for="country">Country</label> <select id="country">
-						<option value="">Select you country</option>
-						<option>Deutschland</option>
-						<option>France</option>
-						<option>Italia</option>
-						<option>United Kingdom</option>
-						<option>United States</option>
-					</select> <label for="state">City</label> <input id="city" placeholder="">
-					<label for="zip">Zip</label> <input type="text" id="zip"
-						placeholder="">
-				</div>
 
-				<hr>
-				<div>
-					<button type="submit">Send</button>
-					<button type="reset">Reset</button>
-				</div>
-			</form>
+					<div>
+						<div>
+							<label for="email">Email</label> <input type="email" id="email"
+								placeholder="youremail@example.com">
+						</div>
+					</div>
+
+					<div>
+						<label for="country">Country</label> <select id="country">
+							<option value="">Select you country</option>
+							<option>Deutschland</option>
+							<option>France</option>
+							<option>Italia</option>
+							<option>United Kingdom</option>
+							<option>United States</option>
+						</select> <label for="state">City</label> <input id="city" placeholder="">
+						<label for="zip">Zip</label> <input type="text" id="zip"
+							placeholder="">
+					</div>
+
+					<hr>
+					<div>
+						<button type="submit">Send</button>
+						<button type="reset">Reset</button>
+					</div>
+				</form>
+			</div>
+
+			<footer>
+				<p>&copy; 2020 ACME Inc.</p>
+			</footer>
 		</div>
-
-		<footer>
-			<p>&copy; 2020 ACME Inc.</p>
-		</footer>
-	</div>
-</body>
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	</body>
 </html>
