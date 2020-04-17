@@ -29,16 +29,18 @@
 							</select>
 						</div>
 						
-						<div class="col-12 col-sm-6 mt-4">
+						<div class="col-12 col-sm-6 mt-4">	
 							<label class="col px-0" for="location">Location</label> 
-							<input id="bolzano form-control"
-								name="location" type="radio"> 
-							<label class="mr-3"
-								for="bolzano">Bolzano/Bozen</label> 
-							<input id="merano form-control"
-								name="location" type="radio"> 
-							<label
-								for="merano">Merano/Meran</label>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="bolzano" name="locationButtons" checked>
+								<label class="custom-control-label" for="bolzano">Bolzano/Bozen</label>
+							</div>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="merano" name="locationButtons">
+								<label class="custom-control-label" for="merano">Merano/Meran</label>
+							</div>
 						</div>
 					</div>
 					
@@ -69,7 +71,7 @@
 						<div class="col-12 col-sm-5 mt-3">
 							<label class="col px-0" for="country">Country</label> 
 							<select class="col form-control" id="country">
-								<option value="">Select you country</option>
+								<option value="">Select your country</option>
 								<option>Deutschland</option>
 								<option>France</option>
 								<option>Italia</option>
