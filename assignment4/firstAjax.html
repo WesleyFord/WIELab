@@ -22,6 +22,14 @@
 		}
 		function loadDoc() {
 			//hide button1, and load html content in div using jQuery
+			var xhttp = new XMLHttpRequest();
+			function loadContent() {
+				$("#demo").html("replace test");
+				console.log("success");
+			}
+			xhttp.open("GET", 'content.txt', true);
+			xhttp.onreadystatechange = loadContent;
+			xhttp.send(null);
 		}
 	</script>
 
