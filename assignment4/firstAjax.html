@@ -19,6 +19,9 @@
 	<script>
 		function resetDoc() {
 			//hide button2, display button1, and reset original content using jQuery
+			$("#button2").hide();
+			$("#button1").show();
+			$("#demo").html("<p>This is the original content!</p>");
 		}
 		function loadDoc() {
 			//hide button1, and load html content in div using jQuery
@@ -32,7 +35,8 @@
 			xhttp.open("GET", 'content.txt', true);
 			xhttp.onreadystatechange = loadContent;
 			xhttp.send(null);
-			
+			$("#button1").hide();
+			$("#button2").show();
 		}
 	</script>
 
