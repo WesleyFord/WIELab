@@ -24,12 +24,15 @@
 			//hide button1, and load html content in div using jQuery
 			var xhttp = new XMLHttpRequest();
 			function loadContent() {
-				$("#demo").html("replace test");
-				console.log("success");
+				$.get('content.txt', function(data) {
+					$("#demo").html(data);
+					console.log("success");
+				}, 'text');
 			}
 			xhttp.open("GET", 'content.txt', true);
 			xhttp.onreadystatechange = loadContent;
 			xhttp.send(null);
+			
 		}
 	</script>
 
