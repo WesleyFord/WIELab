@@ -58,23 +58,65 @@
 	top:60px;
 }
 
-h2 {
+.title {
 	position:absolute;
-	top: 60px;
-	left:30px;
-	width:60%;
-	font-size:3.5vw;
+	top:10%;
+	left:5%;
+	float:left;
+	width:45%;
+	text-align:left;
+	font-size:3vw;
 }
 
-h3 {
+.image {
+	position:absolute;
+	float:right;
+	width:45%;
+	top:5%;
+	right:3%;
+}
+
+.maintext {
 	position:absolute;
 	top:45%;
-	left:5px;
 	text-align:center;
 	font-size:1vw;
-	margin:16px;
+	float:left;
+	margin:5%;
+}
+
+@media only screen and (max-width:625px) {
+	.title {
+		width:100%;
+		text-align:center;
+		top:5%;
+		left:0;
+		font-size:5vw;
+	}
+	.image {
+		display:none;
+	}
+	.maintext {
+		top:35%;
+		left:0;
+		font-size:1.5vw;
+	}
+	#login {
+		right:25px;
+		top:45px;
+		height:20px;
+		font-size:10px;
+		text-align:center;
+		line-height:5px;
+	}
+	#register {
+		right:25px;
+		top:15px;
+		height:20px;
+		font-size:10px;
+		text-align:center;
+		line-height:5px;
+	}
 }
 
 html,body {height:100%;}
-
-
