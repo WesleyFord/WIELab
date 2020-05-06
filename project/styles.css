@@ -1,3 +1,5 @@
+/* General CSS
+-----------------------------------------------------*/
 #page {
 	width:100%;
 	height:100%;
@@ -5,7 +7,7 @@
 
 #header {
 	position:relative;
-	width: 65%;
+	/* width: 65%; */
 	height:80px;
 	color: #0066ff;
 	background-color: lightgray;
@@ -15,13 +17,12 @@
 
 #body {
 	position:relative;
-	width:65%;
+	/* width:65%; */
 	height:100%;
 	color: #0066ff;
 	background-color: lightgray;
 	border-style: none solid solid solid;
 	border-color: #0066ff;
-	
 }
 
 #searchBar {
@@ -36,6 +37,12 @@
 	bottom:35%;
 }
 
+html,body {
+	height:100%;
+}
+
+/* Register page
+-----------------------------------------------------*/
 #register {
 	position:absolute;
 	right:125px;
@@ -140,5 +147,6 @@
 	}
 }
 
-html,body {height:100%;}
+/* Overview page
+-----------------------------------------------------*/
 
