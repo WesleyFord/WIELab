@@ -58,6 +58,17 @@
 	top:60px;
 }
 
+#submit {
+	position:absolute;
+	left:55%;
+}
+
+#modal-window {
+	position:relative;
+	right:13%;
+	width:75%;
+}
+
 .title {
 	position:absolute;
 	top:10%;
@@ -102,8 +113,9 @@
 	position:absolute;
 	width:25%;
 	height:auto;
-	left:35%;
+	left:40%;
 	top:30%;
+	color:#0066ff;
 }
 
 @media only screen and (max-width:625px) {
@@ -141,4 +153,5 @@
 }
 
 html,body {height:100%;}
+
 
