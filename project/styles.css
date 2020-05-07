@@ -8,16 +8,16 @@
 #header {
 	position:relative;
 	/* width: 65%; */
-	height:80px;
+	height:60px;
 	color: #0066ff;
 	background-color: lightgray;
 	border-style: solid;
 	border-color: #0066ff;
 }
 
-#body {
+.home-page #body {
 	position:relative;
-	/* width:65%; */
+	width:65%;
 	height:100%;
 	color: #0066ff;
 	background-color: lightgray;
@@ -149,4 +149,40 @@ html,body {
 
 /* Overview page
 -----------------------------------------------------*/
+.overview-page #body {
+	color: #0066ff;
+	background-color: lightgray;
+	border-style: none solid solid solid;
+	border-color: #0066ff;
+}
 
+.overview-page .blog-teaser {
+	background: lightgrey;
+	color: #0066ff;
+	border: 1px solid #0066ff;
+	margin: 30px 0;
+}
+
+.overview-page a:hover {
+	text-decoration: none;
+}
+
+.overview-page .blog-teaser:hover {
+	background: #fff;
+	cursor: pointer;
+}
+
+.overview-page .blog-img {
+	padding: 15px 0;
+	max-width: 100%;
+}
+
+.overview-page .blog-hl {
+	padding: 15px 0;
+}
+
+.overview-page .profile-img {
+	height: 40px;
+	width: 40px !important;
+	border-radius: 50%;
+}
