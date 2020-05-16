@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Web and Internet Engineering Assignment 3">
+<meta name="author" content="Roberto Confalonieri">
+<title>PHP - FORMS </title>
+
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+	<div class="container">
+
+		<h1> Sending data via form </h1>
+
+		<div class="row">
+			<div class="col-md-12 order-md-1">
+				
+				<form action="welcome.php" method="get">
+					
+					<div class="row">
+						<div class="col-md-6 mb-3">
+							<label for="firstName">First name</label> <input type="text"
+								class="form-control" id="firstName" name="firstName" placeholder="" value="">
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="lastName">Last name</label> <input type="text"
+								class="form-control" id="lastName" name="lastName"  placeholder="" value="">
+						</div>
+					</div>
+					
+					<hr class="mb-4">
+					<div class="row">
+						<div class="col-md-2 col-sm-6">
+							<button class="btn btn-success btn-lg btn-block" type="submit">Send</button>
+						</div>
+						<div class="col-md-2 col-sm-6">
+							<button class="btn btn-danger btn-lg btn-block" type="reset">Reset</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<footer class="my-5 text-muted text-center text-small">
+			<p class="mb-1">&copy; 2020 ACME Inc.</p>
+		</footer>
+	</div>
+</body>
+</html>
