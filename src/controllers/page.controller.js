@@ -6,7 +6,7 @@ exports.renderLogin = (req, res, next) => {
 
     console.log('render login page')
     //if req.get('Warning'=='Not Logged In') then warn user 
-    return res.sendFile(path.join(__dirname, '../../views/login.html'))
+    return res.render('login')
 }
 
 exports.renderRegister = (req, res, next) => {
@@ -22,11 +22,11 @@ exports.renderIndex = (req, res, next) => {
     //render index page
     if(!req.user){
         console.log('render welcome page(user is not logged in)')
-        return res.sendFile(path.join(__dirname, '../../views/index.html'))
+        return res.render('index', {user: req.user})
     }
     else{
         console.log('render user page(user is logged in)')
-        return res.sendFile(path.join(__dirname, '../../views/userIndex.html'))
+        return res.render('index', {user: req.user})
     }
 
 }
