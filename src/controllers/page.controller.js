@@ -129,7 +129,7 @@ exports.renderAllPosts = (req, res, next) => {
                 foreach(post in posts)...
     */
 
-    return res.send('render all posts')
+    return res.send(`render all posts\n${req.posts}`)
 
 }
 

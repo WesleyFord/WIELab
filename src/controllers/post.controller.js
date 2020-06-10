@@ -52,6 +52,7 @@ exports.readAllPosts = (req, res, next) => {
         if (err) return next(err)
 
         req.posts = posts
+        next()
     })
 
 }
