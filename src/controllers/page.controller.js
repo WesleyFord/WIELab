@@ -102,7 +102,7 @@ exports.renderUserPosts = (req, res, next) => {
     /*
     All posts which are written by user are needed
 
-    -req.user.posts -> JSON object containing posts
+    -req.user.posts -> JavaScript object containing posts
                 foreach(post in posts){
                     post
                         ._id
@@ -125,7 +125,7 @@ exports.renderAllPosts = (req, res, next) => {
     /*
     All posts are needed
 
-    -req.posts -> JSON object containing posts
+    -req.posts -> JavaScript object containing posts
                 foreach(post in posts)...
     */
 
@@ -137,8 +137,8 @@ exports.renderPost = (req, res, next) => {
 
     /*
     Post selected by user and its comments are needed
-    -req.post -> One JSON object containing post data
-    -req.post.comments -> JSON object containing comments of the post 
+    -req.post -> One JavaScript object containing post data
+    -req.post.comments -> JavaScript object containing comments of the post 
                 foreach(comment in comments)
                     comment
                         ._id
