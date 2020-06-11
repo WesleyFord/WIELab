@@ -21,16 +21,53 @@
 	
 }
 
-#searchBar {
-	position:absolute;
-	right:250px;
-	bottom:35%;
+html,body {
+	height:100%;
 }
 
-#searchButton {
-	position:absolute;
-	right:223px;
-	bottom:35%;
+/* search */
+@media (max-width: 785px) { 
+
+	.custom-search {
+		width: inherit;
+		max-width: 300px;
+	}
+
+}
+@media (max-width: 576px) { 
+
+	.custom-search {
+		/* flex: 0 0 66.666667%; */
+		max-width: 66.666667%;
+		width: inherit;
+		margin-left: 0 !important;
+		margin-right: auto;
+		padding-left: 0 !important;
+	}
+	
+	.custom-profile {
+		flex: 0 0 33.333333%;
+		max-width: 33.333333%;
+		text-align: center;
+	} 
+
+	.custom-search form input {
+		width: auto;
+		max-width: 180px;
+		margin-left: 0 !important;
+		margin-bottom: 5px !important;
+	}
+}
+
+@media (max-width: 576px) { 
+	
+	.custom-profile {
+		max-width: 25%;
+	} 
+
+	.custom-search form input {
+		max-width: 154px;
+	}
 }
 
 /*Home page CSS
@@ -83,7 +120,12 @@
 	border-radius: 50%;
 }
 
-html,body {height:100%;}
 
 
 
+/* Overview page
+-----------------------------------------------------*/
+
+.blog-img-inline {
+	max-width: 40% !important;
+}
