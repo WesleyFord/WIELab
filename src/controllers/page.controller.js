@@ -129,7 +129,8 @@ exports.renderAllPosts = (req, res, next) => {
                 foreach(post in posts)...
     */
 
-    return res.send(`render all posts\n${req.posts}`)
+    //return res.send(`render all posts\n${req.posts}`)
+    return res.render('overview', {posts: req.posts})
 
 }
 
@@ -148,8 +149,10 @@ exports.renderPost = (req, res, next) => {
                         .timestamp
     */
 
-    return res.send(`render selected post: ${req.post}
-                    with comments: ${req.post.comments}`)
+    /* return res.send(`render selected post: ${req.post}
+                    with comments: ${req.post.comments}`) */
+
+        return res.render('single-post-view', {post: req.post})
 
 }
 
