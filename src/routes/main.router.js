@@ -20,6 +20,8 @@ router.get('/user/createProfile', pageController.renderProfileCreate)
 
 router.post('/user/createProfile', userController.createProfile)
 
+router.post('/user/uploadProfilePicture', userController.uploadProfilePhoto)
+
 router.get('/user/editProfile', userController.readProfile ,pageController.renderProfileEdit)
 
 router.patch('/user/editProfile', userController.updateProfile)

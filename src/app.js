@@ -1,6 +1,7 @@
 //Definitions
 const express = require('express')
 const session = require('express-session')
+const fileUpload = require('express-fileupload')
 const mongoose = require('mongoose')
 const passport = require('passport')
 const cors = require('cors')
@@ -8,6 +9,7 @@ const bodyParser = require('body-parser')
 const path = require('path')
 const CONNSTR = require('./config/db.connection')
 const PORT = require('./config/server.port')
+const { debug } = require('console')
 const app = express()
 
 //Configuration: express-session
@@ -21,6 +23,8 @@ app.use(bodyParser.json())
 app.use(cors())
 //Configuration: express-static
 app.use(express.static(path.join(__dirname, '..', 'public')))
+//Configuration: express-fileupload
+app.use(fileUpload({debug: true}))
 //Configuration: errorHandler
 //app.use('*', require('./services/errorhandler.mw').errorHandler)
 //Configuration: routers

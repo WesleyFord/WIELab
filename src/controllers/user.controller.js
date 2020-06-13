@@ -9,7 +9,6 @@ exports.createProfile = (req, res, next) => {
         userId: req.user._id,
         email: req.user.email,
         name: req.body.name,
-        profilePicture: photoService.uploadPhoto(req.body.profilePicture),
         interestedIn: req.body.interestedIn,
         bio: req.body.bio
     }
@@ -20,29 +19,49 @@ exports.createProfile = (req, res, next) => {
         if(profile){
             
             dbService.updateUser(req.user, {hasProfile: true}, (err, u) => {
-                if(err) next(err)
+                if(err) return next(err)
                 return res.send({message: 'profile_created', profile: profile})
             })    
         }
     })
 }
 
+exports.uploadProfilePhoto = (req, res, next) => {
+    photoService.uploadUserPhoto(req, (err, name) => {
+        if (err) return next(err)
+
+        dbService.findProfile(req.user._id, (err, profile) => {
+            if(err) return next(err)
+
+            if(profile){
+                var update = {
+                    profilePicture: name
+                }
+
+                dbService.updateProfile(profile._id, update, (err, updatedProfile) => {
+                    if(err) return next(err)
+                    return res.send({message: 'picture_uploaded', updatedProfile: updatedProfile})
+                })
+            }
+        })
+    })
+}
+
 exports.updateProfile = (req, res, next) => {
 
     dbService.findProfile(req.user._id, (err, profile) => {
-        if (err) next(err)
+        if (err) return next(err)
 
         if(profile){
 
             var update = {
                 name: req.body.name || profile.name,
-                profilePicture: photoService.updatePhoto(req.body.profilePicture) || profile.profilePicture,
                 interestedIn: req.body.interestedIn || profile.interestedIn,
                 bio: req.body.bio || profile.bio
             }
 
             dbService.updateProfile(profile._id, update, (err, updatedProfile) => {
-                if(err) next(err)
+                if(err) return next(err)
                 return res.send({message: 'profile_updated', updatedProfile: updatedProfile})
             })
         } else if(!profile){
@@ -55,7 +74,7 @@ exports.updateProfile = (req, res, next) => {
 exports.readProfile = (req, res, next) => {
 
     dbService.findProfile(req.user._id, (err, profile) => {
-        if(err) next(err)
+        if(err) return next(err)
 
         if (!profile){
             return res.redirect('/user/createProfile')
