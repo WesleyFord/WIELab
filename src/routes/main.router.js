@@ -2,6 +2,7 @@ const router = require('express').Router()
 const pageController = require('../controllers/page.controller')
 const userController = require('../controllers/user.controller')
 const postController = require('../controllers/post.controller')
+const searchController = require('../controllers/search.controller')
 
 router.use(function isAuthenticated(req, res, next) {
 
@@ -31,6 +32,10 @@ router.get('/user/editProfile', userController.readProfile ,pageController.rende
 router.patch('/user/editProfile', userController.updateProfile)
 
 router.get('/user/myPosts', postController.readUserPosts, pageController.renderUserPosts)
+
+//Search
+
+router.get('/search', postController.readAllPosts, searchController.searchPosts, pageController.renderSearchResults)
 
 //Post
 

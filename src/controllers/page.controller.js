@@ -1,4 +1,5 @@
 const path = require('path')
+const { resolveSoa } = require('dns')
 
 /*
 ===========
@@ -182,4 +183,9 @@ exports.renderComment = (req, res, next) => {
     // Comment object needed
     // -req.comment
     return res.send(`comment: ${req.comment}`)
+}
+
+exports.renderSearchResults = (req, res, next) => {
+
+    return res.send({message: 'search_results', results: req.search.results})
 }
