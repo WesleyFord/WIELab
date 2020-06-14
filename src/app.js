@@ -3,15 +3,13 @@ const express = require('express')
 const session = require('express-session')
 const fileUpload = require('express-fileupload')
 const mongoose = require('mongoose')
-const passport = require('passport')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const path = require('path')
-const CONNSTR = require('./config/db.connection')
-const PORT = require('./config/server.port')
-const { debug } = require('console')
 const app = express()
 
+//Configuration: dotenv
+require('dotenv').config({path: path.join(__dirname, '../.env')})
 //Configuration: express-session
 app.use(session({secret: 'b4dc0d3', resave: false, saveUninitialized: true}))
 //Configuration: passport
@@ -39,7 +37,7 @@ mongoose.set('useFindAndModify', false)
 mongoose.set('useCreateIndex', true)
 mongoose.set('useUnifiedTopology', true)
 
-mongoose.connect(CONNSTR)
+mongoose.connect(process.env.CONNSTR)
     .then(() => {
         console.log('Succesfully connected to DB...')
         
@@ -47,6 +45,6 @@ mongoose.connect(CONNSTR)
         console.log(err)
     })
 
-app.listen(PORT, () => {
-    console.log(`Listening on port -> ${PORT}`)
+app.listen(process.env.PORT, () => {
+    console.log(`Listening on port -> ${process.env.PORT}`)
 })
