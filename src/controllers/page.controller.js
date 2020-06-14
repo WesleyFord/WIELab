@@ -115,7 +115,7 @@ exports.renderUserPosts = (req, res, next) => {
                 }
     */
 
-    return res.send('my posts')
+    return res.send({message: 'user posts', posts: req.user.posts})
 }
 
 //Post
@@ -160,7 +160,7 @@ exports.renderPostEdit = (req, res, next) => {
 
     //Post needed
     // -req.post
-    return res.send('render edit post page')
+    return res.send({message: 'render edit post page', post: req.post})
 
 }
 

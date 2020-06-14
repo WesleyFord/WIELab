@@ -1,5 +1,6 @@
 const dbService = require('../services/database.service')
 const photoService = require('../services/photo.service')
+const { db } = require('../models/user.model')
 
 exports.createPost = (req, res, next) => {
 
@@ -7,14 +8,88 @@ exports.createPost = (req, res, next) => {
         userId: req.user._id,
         header: req.body.header,
         text: req.body.text,
-        picture: 'path',
         keywords: req.body.keywords,
     }
 
     dbService.insertPost(postInfo, (err, post) => {
         if (err) return next(err)
 
-        return res.send({message: 'post_created', post: post})
+        let redirectUrl = '/post/' + post._id + '/editPost'
+        return res.redirect(redirectUrl)
+    })
+}
+
+exports.uploadPostPhoto = (req, res, next) => {
+
+    var postId = req.params.postId
+
+    dbService.findPost(postId, (err, post) => {
+        if (err) return next(err)
+
+        if(post){
+            photoService.uploadPostPhoto(req, (err, path) => {
+                if (err) return next(err)
+
+                dbService.updatePost(postId, {picture: path}, (err, updatedPost) => {
+                    if (err) return next(err)
+
+                    return res.send({message: 'photo_uploaded', updatedPost: updatedPost})
+                })
+            })
+        } else if (!post) return res.send({message: 'post_not_found'})
+        else{
+            return res.send({message: 'server_error'})
+        }
+    })
+}
+
+exports.readPostPhoto = (req, res, next) => {
+
+    var postId = req.params.postId
+
+    dbService.findPost(postId, (err, post) => {
+        if (err) return next(err)
+
+        if(post && post.picture){
+            return res.sendFile(post.picture)
+
+        } else if (!post) {
+            return res.send({message: 'post_not_found'})
+
+        } else if (!post.picture){
+            return res.send({message: 'no_picture'})
+
+        } else return res.send({message: 'server_error'})
+    })
+}
+
+exports.deletePostPhoto = (req, res, next) => {
+
+    var postId = req.params.postId
+
+    dbService.findPost(postId, (err, post) => {
+        if (err) return next(err)
+        
+        if(post && post.picture){
+            
+            photoService.deletePhoto(post.picture, (err, isDeleted) => {
+                if (err) return next(err)
+
+                if(isDeleted){
+                    dbService.updatePost(postId, {picture: null}, (err, updatedPost) => {
+                        if (err) return next(err)
+
+                        return res.send({message: 'picture_deleted', updatedPost: updatedPost})
+                    })
+                }
+            })
+        } else if (!post){
+            return res.send({message: 'post_not_found'})
+
+        } else if (!post.picture){
+            return res.send({message: 'picture_not_found'})
+
+        } else return res.send({message: 'server_error'})
     })
 }
 
@@ -46,7 +121,7 @@ exports.readUserPosts = (req, res, next) => {
 
 exports.readAllPosts = (req, res, next) => {
 
-    var query = {} //To select all posts
+    var query = {isPublished: true} //To select all published posts
 
     dbService.findPosts(query, (err, posts) => {
         if (err) return next(err)
@@ -74,7 +149,8 @@ exports.updatePost = (req, res, next) => {
                 text: req.body.text || post.text,
                 header: req.body.header || post.header,
                 picture: photoService.updatePhoto(req.body.picture) || post.picture,
-                keywords: req.body.keywords || post.keywords
+                keywords: req.body.keywords || post.keywords,
+                isPublished: true
             }
 
             dbService.updatePost(postId, update, (err, updatedPost) => {

@@ -20,7 +20,11 @@ router.get('/user/createProfile', pageController.renderProfileCreate)
 
 router.post('/user/createProfile', userController.createProfile)
 
+router.get('/user/profilePicture', userController.readProfilePhoto)
+
 router.post('/user/uploadProfilePicture', userController.uploadProfilePhoto)
+
+router.delete('/user/deleteProfilePicture', userController.deleteProfilePhoto)
 
 router.get('/user/editProfile', userController.readProfile ,pageController.renderProfileEdit)
 
@@ -40,9 +44,13 @@ router.patch('/post/:postId/editPost', postController.updatePost)
 
 router.delete('/post/:postId', postController.deletePost)
 
-router.get('/posts/createNewPost', pageController.renderPostCreate)
+router.get('/posts/createNewPost', postController.createPost)
 
-router.post('/posts/createNewPost', postController.createPost)
+router.get('/post/:postId/photo', postController.readPostPhoto)
+
+router.post('/post/:postId/uploadPhoto', postController.uploadPostPhoto)
+
+router.delete('/post/:postId/deletePicture', postController.deletePostPhoto)
 
 //Comment
 

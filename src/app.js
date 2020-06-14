@@ -24,7 +24,7 @@ app.use(cors())
 //Configuration: express-static
 app.use(express.static(path.join(__dirname, '..', 'public')))
 //Configuration: express-fileupload
-app.use(fileUpload({debug: true}))
+app.use(fileUpload())
 //Configuration: errorHandler
 //app.use('*', require('./services/errorhandler.mw').errorHandler)
 //Configuration: routers

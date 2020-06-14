@@ -11,11 +11,13 @@ var PostSchema = new Schema({
 
     header: {
         required: true,
+        default: "New post",
         type: String
     },
 
     text: {
         required: true,
+        default: "New post",
         type: String
     },
 
@@ -27,6 +29,11 @@ var PostSchema = new Schema({
     keywords: {
         //E: array of keywords
         type: Array
+    },
+
+    isPublished: {
+        default: false,
+        type: Boolean
     },
 
     timestamp:{

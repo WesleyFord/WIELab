@@ -1,5 +1,7 @@
 const dbService = require('../services/database.service')
 const photoService = require('../services/photo.service')
+const { db } = require('../models/user.model')
+const { propfind } = require('../routes/main.router')
 
 exports.createProfile = (req, res, next) => {
 
@@ -27,7 +29,8 @@ exports.createProfile = (req, res, next) => {
 }
 
 exports.uploadProfilePhoto = (req, res, next) => {
-    photoService.uploadUserPhoto(req, (err, name) => {
+
+    photoService.uploadUserPhoto(req, (err, path) => {
         if (err) return next(err)
 
         dbService.findProfile(req.user._id, (err, profile) => {
@@ -35,7 +38,7 @@ exports.uploadProfilePhoto = (req, res, next) => {
 
             if(profile){
                 var update = {
-                    profilePicture: name
+                    profilePicture: path
                 }
 
                 dbService.updateProfile(profile._id, update, (err, updatedProfile) => {
@@ -44,6 +47,50 @@ exports.uploadProfilePhoto = (req, res, next) => {
                 })
             }
         })
+    })
+}
+
+exports.readProfilePhoto = (req, res, next) => {
+
+    dbService.findProfile(req.user._id, (err, profile) => {
+        if (err) return next(err)
+
+        if(!profile || !profile.profilePicture){
+            return res.sendFile(photoService.defaultProfilePicture)
+
+        } else
+            if(profile){
+                return res.sendFile(profile.profilePicture)
+        }      
+        else return res.status(500).send({message: 'server_error'})
+    })
+}
+
+exports.deleteProfilePhoto = (req, res, next) => {
+    
+    dbService.findProfile(req.user._id, (err, profile) => {
+        if(err) return next(err)
+
+        if(profile && profile.profilePicture){
+            
+            photoService.deletePhoto(profile.profilePicture, (err, isDeleted) => {
+                if (err) return next(err)
+
+                if(isDeleted){
+                    dbService.updateProfile(profile._id, {profilePicture: null}, (err, updatedProfile) => {
+                        if (err) return next(err)
+
+                        return res.send({message: 'picture_deleted', updatedProfile: updatedProfile})
+                    })
+                }
+            })
+        } else if (!profile){
+            return res.send({message: 'profile_not_found'})
+
+        } else if (!profile.profilePicture){    
+            return res.send({message: 'no_picture_to_delete'})
+            
+        } else return res.send({message: 'server_error'})
     })
 }
 
