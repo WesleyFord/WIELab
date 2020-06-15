@@ -43,6 +43,20 @@ exports.renderRegister = (req, res, next) => {
     return res.send('render register page')
 }
 
+exports.renderForgotPassword = (req, res, next) => {
+
+    //No data needed to render this page
+
+    return res.send('render forgot password page')
+}
+
+exports.renderForgotPasswordChange = (req, res, next) => {
+
+    //No data needed to render this page
+
+    return res.send('render change password page for forgotten password')
+}
+
 //User
 
 exports.renderIndex = (req, res, next) => {

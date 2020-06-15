@@ -20,6 +20,14 @@ router.get('/register', isAuthenticated, pageController.renderLogin)
 
 router.post('/register', isAuthenticated, authController.register, mailController.welcome)
 
+router.get('/forgotPassword', isAuthenticated, pageController.renderForgotPassword)
+
+router.post('/forgotPassword', isAuthenticated, authController.createToken, mailController.forgotPassword)
+
+router.get('/forgotPassword/:token', isAuthenticated, authController.verifyToken, pageController.renderForgotPasswordChange)
+
+router.post('/forgotPassword/:token', isAuthenticated, authController.verifyToken, authController.changePassword)
+
 router.get('/logout', authController.logout)
 
 module.exports = router

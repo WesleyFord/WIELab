@@ -31,6 +31,15 @@ exports.updateUser = (userId, update, cb) => {
     })  
 }
 
+exports.findUserByEmail = (email, cb) => {
+
+    User.findOne({email: email}, (err, user) => {
+        if (err) return cb(err)
+
+        return cb(null, user)
+    })
+}
+
 //Profile
 
 exports.insertProfile = (profileInfo, cb) => {
