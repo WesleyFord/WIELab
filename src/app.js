@@ -11,7 +11,7 @@ const app = express()
 //Configuration: dotenv
 require('dotenv').config({path: path.join(__dirname, '../.env')})
 //Configuration: express-session
-app.use(session({secret: 'b4dc0d3', resave: false, saveUninitialized: true}))
+app.use(session({secret: process.env.SECRET, resave: false, saveUninitialized: true}))
 //Configuration: passport
 require('./config/passport')(app)
 //Configuration: body-parser
