@@ -1,7 +1,5 @@
 const dbService = require('../services/database.service')
 const photoService = require('../services/photo.service')
-const { db } = require('../models/user.model')
-const { propfind } = require('../routes/main.router')
 
 exports.createProfile = (req, res, next) => {
 
@@ -25,6 +23,19 @@ exports.createProfile = (req, res, next) => {
                 return res.send({message: 'profile_created', profile: profile})
             })    
         }
+    })
+}
+
+exports.updatePassword = (req, res, next) => {
+    
+    var newPassword = req.body.newPassword
+    req.user.oldPassword = req.user.password
+    req.user.password = newPassword
+
+    req.user.save((err, updatedUser) => {
+        if (err) return next(err)
+
+        next() //Inform user
     })
 }
 

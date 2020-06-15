@@ -3,6 +3,7 @@ const pageController = require('../controllers/page.controller')
 const userController = require('../controllers/user.controller')
 const postController = require('../controllers/post.controller')
 const searchController = require('../controllers/search.controller')
+const mailController = require('../controllers/mail.controller')
 
 router.use(function isAuthenticated(req, res, next) {
 
@@ -32,6 +33,10 @@ router.delete('/user/deleteProfilePicture', userController.deleteProfilePhoto)
 router.get('/user/editProfile', userController.readProfile ,pageController.renderProfileEdit)
 
 router.patch('/user/editProfile', userController.updateProfile)
+
+router.get('/user/changePassword', pageController.renderChangePassword)
+
+router.post('/user/changePassword', userController.updatePassword, mailController.changePassword)
 
 router.get('/user/myPosts', postController.readUserPosts, pageController.renderUserPosts)
 

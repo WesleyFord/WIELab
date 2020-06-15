@@ -77,6 +77,13 @@ exports.renderIndex = (req, res, next) => {
 
 }
 
+exports.renderChangePassword = (req, res, next) => {
+
+    //No data needed 
+
+    return res.send('render change password page')
+}
+
 exports.renderProfile = (req, res, next) => {
 
     /*
