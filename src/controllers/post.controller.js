@@ -148,7 +148,6 @@ exports.updatePost = (req, res, next) => {
             var update = {
                 text: req.body.text || post.text,
                 header: req.body.header || post.header,
-                picture: photoService.updatePhoto(req.body.picture) || post.picture,
                 keywords: req.body.keywords || post.keywords,
                 isPublished: true
             }
