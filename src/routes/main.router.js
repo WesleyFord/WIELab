@@ -23,6 +23,8 @@ router.post('/user/createProfile', userController.createProfile)
 
 router.get('/user/profilePicture', userController.readProfilePhoto)
 
+router.get('/users/:userId/profilePicture', userController.readUsersProfilePhoto)
+
 router.post('/user/uploadProfilePicture', userController.uploadProfilePhoto)
 
 router.delete('/user/deleteProfilePicture', userController.deleteProfilePhoto)

@@ -66,6 +66,24 @@ exports.readProfilePhoto = (req, res, next) => {
     })
 }
 
+exports.readUsersProfilePhoto = (req, res, next) => {
+
+    var userId = req.params.userId
+
+    dbService.findProfile(userId, (err, profile) => {
+        if (err) return next(err)
+
+        if(!profile || !profile.profilePicture){
+            return res.sendFile(photoService.defaultProfilePicture)
+
+        } else
+            if(profile){
+                return res.sendFile(profile.profilePicture)
+        }      
+        else return res.status(500).send({message: 'server_error'})
+    })
+}
+
 exports.deleteProfilePhoto = (req, res, next) => {
     
     dbService.findProfile(req.user._id, (err, profile) => {
