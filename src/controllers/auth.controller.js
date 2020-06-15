@@ -12,7 +12,8 @@ exports.register = (req, res, next) => {
         if(err) next(err)
         
         if (user){
-            return res.status(200).send({message: 'registration_complete'})
+            req.user = user
+            next()
         } 
     })
 }

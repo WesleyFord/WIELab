@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const authController = require('../controllers/auth.controller')
 const pageController = require('../controllers/page.controller')
+const mailController = require('../controllers/mail.controller')
 
 function isAuthenticated(req, res, next) {
     if(req.user){
@@ -17,7 +18,7 @@ router.post('/login', isAuthenticated, authController.login)
 
 router.get('/register', isAuthenticated, pageController.renderLogin)
 
-router.post('/register', isAuthenticated, authController.register)
+router.post('/register', isAuthenticated, authController.register, mailController.welcome)
 
 router.get('/logout', authController.logout)
 
