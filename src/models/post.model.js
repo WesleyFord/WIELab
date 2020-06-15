@@ -27,8 +27,7 @@ var PostSchema = new Schema({
     },
 
     keywords: {
-        //E: array of keywords
-        type: Array
+        type: String
     },
 
     isPublished: {
