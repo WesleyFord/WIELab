@@ -1,6 +1,8 @@
 const dbService = require('../services/database.service')
 const photoService = require('../services/photo.service')
 const { db } = require('../models/user.model')
+const ErrorHandler = require('../helpers/error.handler')
+const { Error } = require('mongoose')
 
 exports.createPost = (req, res, next) => {
 
@@ -36,9 +38,9 @@ exports.uploadPostPhoto = (req, res, next) => {
                     return res.send({message: 'photo_uploaded', updatedPost: updatedPost})
                 })
             })
-        } else if (!post) return res.send({message: 'post_not_found'})
+        } else if (!post) return next(new ErrorHandler(403, 'post_not_found'))
         else{
-            return res.send({message: 'server_error'})
+            return next(new ErrorHandler(500, 'server_error'))
         }
     })
 }
@@ -54,12 +56,12 @@ exports.readPostPhoto = (req, res, next) => {
             return res.sendFile(post.picture)
 
         } else if (!post) {
-            return res.send({message: 'post_not_found'})
+            return next(new ErrorHandler(403, 'post_not_found'))
 
         } else if (!post.picture){
-            return res.send({message: 'no_picture'})
+            return next(new ErrorHandler(403, 'no_picture'))
 
-        } else return res.send({message: 'server_error'})
+        } else return next(new ErrorHandler(500, 'server_error'))
     })
 }
 
@@ -84,12 +86,12 @@ exports.deletePostPhoto = (req, res, next) => {
                 }
             })
         } else if (!post){
-            return res.send({message: 'post_not_found'})
+            return next(new ErrorHandler(403, 'post_not_found'))
 
         } else if (!post.picture){
-            return res.send({message: 'picture_not_found'})
+            return next(new ErrorHandler(403, 'no_picture'))
 
-        } else return res.send({message: 'server_error'})
+        } else return next(new ErrorHandler(500, 'server_error'))
     })
 }
 
@@ -100,7 +102,10 @@ exports.readPost = (req, res, next) => {
     dbService.findPost(postId, (err, post) => {
         if (err) return next(err)
 
+        if(!post) return next(new ErrorHandler(403, 'no_post_found_' + postId))
+
         req.post = post
+
         return next()
     })
 
@@ -139,9 +144,9 @@ exports.updatePost = (req, res, next) => {
 
         if (err) return next(err)
 
-        else if (!post) return res.send({message: 'post_not_found'})
+        else if (!post) return next(new ErrorHandler(403, 'post_not_found'))
 
-        else if(!post.userId.equals(req.user._id)) return res.send({message: 'unauthorized'})
+        else if(!post.userId.equals(req.user._id)) return next(new ErrorHandler(401, 'unauthorized'))
 
         else if(post){
 
@@ -158,6 +163,8 @@ exports.updatePost = (req, res, next) => {
                 return res.send({message: 'post_updated', newPost: updatedPost})
             })
         }
+
+        else return next(new ErrorHandler(500, 'server_error'))
     })
 
 }
@@ -170,9 +177,9 @@ exports.deletePost = (req, res, next) => {
 
         if(err) return next(err)
 
-        else if (!post) return res.send({message: 'post_not_found'})
+        else if (!post) return next(new ErrorHandler(403, 'post_not_found'))
 
-        else if(!post.userId.equals(req.user._id)) return res.send({message: 'unauthorized'})
+        else if(!post.userId.equals(req.user._id)) return next(new ErrorHandler(401, 'unauthorized'))
 
         else if (post) {
             dbService.deletePost(postId, (err, deletedPost) => {
@@ -182,7 +189,7 @@ exports.deletePost = (req, res, next) => {
             })
         }
 
-        else return res.send({message: 'unknown_error'})
+        else return next(new ErrorHandler(500, 'server_error'))
     })
 
 }
@@ -207,7 +214,6 @@ exports.createComment = (req, res, next) => {
 }
 
 exports.readComment = (req, res, next) => {
-    //Do we need this?
     var commentId = req.params.commentId
 
     dbService.findComment(commentId, (err, comment) => {
@@ -225,7 +231,9 @@ exports.readAllComments = (req, res, next) => {
     dbService.findPostComments(postId, (err, comments) => {
         if (err) return next(err)
 
-        req.post.comments = comments
+        if(comments){
+            req.post.comments = comments
+        }
         return next()
     })
     
@@ -239,9 +247,9 @@ exports.updateComment = (req, res, next) => {
     dbService.findComment(commentId, (err, comment) => {
         if(err) return next(err)
 
-        else if(!comment) return res.send({message: 'comment_not_found'})
+        else if(!comment) return next(new ErrorHandler(403, 'comment_not_found'))
 
-        else if(!comment.userId.equals(req.user._id)) return res.send({message: 'unauthorized'})
+        else if(!comment.userId.equals(req.user._id)) return next(new ErrorHandler(401, 'unauthorized'))
 
         else if(comment){
 
@@ -256,7 +264,7 @@ exports.updateComment = (req, res, next) => {
             })
         }
 
-        else return res.send({message: 'unknown_error'})
+        else return next(new ErrorHandler(500, 'server_error'))
     })
 
 }
@@ -281,7 +289,7 @@ exports.deleteComment = (req, res, next) => {
             })
         }
 
-        else return res.send({message: 'unknown_error'})
+        else return next(new ErrorHandler(500, 'server_error'))
     })
 }
 
@@ -318,6 +326,8 @@ exports.changeLikeStatus = (req, res, next) => {
 
             
         }
+
+        else return next(new ErrorHandler(500, 'server_error'))
     })
     
 }

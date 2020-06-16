@@ -17,9 +17,13 @@ exports.insertUser = (userInfo, cb) => {
     var user = new User(userInfo)
 
     user.save((err, usr) => {
-        if (err) {
-            if(err.code = 11000) return cb(new ErrorHandler(500, 'username_is_taken'))
-        }
+        if (err.code = 11000) {
+            if(err.keyValue){
+                return cb(new ErrorHandler(400, 'username_is_taken'))
+            } else if(err.errors){
+                return cb(new ErrorHandler(400, 'fill_all_required_fields'))
+            }
+        } else if(err) return cb(new ErrorHandler(500, 'database_error'))
 
         return cb(null, usr)
     })
@@ -28,7 +32,7 @@ exports.insertUser = (userInfo, cb) => {
 exports.updateUser = (userId, update, cb) => {
 
     User.findByIdAndUpdate(userId, {$set: update}, {new: true}, (err, updatedUser) => {
-        if (err) return cb(new ErrorHandler(500, 'database_error'))
+        if (err) return cb(new ErrorHandler(500, 'cannot_update_user_' + userId))
 
         return cb(null, updatedUser)
     })  
@@ -37,7 +41,7 @@ exports.updateUser = (userId, update, cb) => {
 exports.findUserByEmail = (email, cb) => {
 
     User.findOne({email: email}, (err, user) => {
-        if (err) return cb(new ErrorHandler(500, 'database_error'))
+        if (err) return cb(new ErrorHandler(500, 'cannot_find_user_' + email))
 
         return cb(null, user)
     })
@@ -49,7 +53,13 @@ exports.insertProfile = (profileInfo, cb) => {
     var userProfile = new UserProfile(profileInfo)
 
     userProfile.save((err, usrProfile) => {
-        if(err) return cb(new ErrorHandler(500, 'database_error'))
+        if (err.code = 11000) {
+            if(err.keyValue){
+                return cb(new ErrorHandler(400, 'profile_already_created'))
+            } else if(err.errors){
+                return cb(new ErrorHandler(400, 'fill_all_required_fields'))
+            }
+        } else if(err) return cb(new ErrorHandler(500, 'database_error'))
 
         return cb(null, usrProfile)
     })
@@ -58,7 +68,7 @@ exports.insertProfile = (profileInfo, cb) => {
 exports.updateProfile = (profileId, update, cb) => {
 
     UserProfile.findByIdAndUpdate(profileId, {$set: update}, {new: true}, (err, updatedProfile) => {
-        if(err) return cb(new ErrorHandler(500, 'database_error'))
+        if(err) return cb(new ErrorHandler(500, 'cannot_update_profile_' + profileId))
 
         return cb(null, updatedProfile)
     })
@@ -67,7 +77,7 @@ exports.updateProfile = (profileId, update, cb) => {
 exports.findProfile = (userId, cb) => {
 
     UserProfile.findOne({userId: userId}, (err, profile) => {
-        if(err) return cb(new ErrorHandler(500, 'database_error'))
+        if(err) return cb(new ErrorHandler(500, 'cannot_find_profile' + userId))
 
         return cb(null, profile)
     })
@@ -80,7 +90,10 @@ exports.insertPost = (postInfo, cb) => {
     var post = new Post(postInfo)
 
     post.save((err, pst) => {
-        if(err) return cb(new ErrorHandler(500, 'database_error'))
+        if(err.code == 11000 && err.errors){
+            return cb(new ErrorHandler(400, 'fill_all_required_fields'))
+
+        } else if(err) return cb(new ErrorHandler(500, 'database_error'))
 
         return cb(null, pst)
     })
@@ -89,7 +102,7 @@ exports.insertPost = (postInfo, cb) => {
 exports.findPost = (postId, cb) => {
 
     Post.findById(postId, (err, post) => {
-        if(err) return cb(new ErrorHandler(500, 'database_error'))
+        if(err) return cb(new ErrorHandler(500, 'cannot_find_post_' + postId))
 
         return cb(null, post)
     })
@@ -98,7 +111,7 @@ exports.findPost = (postId, cb) => {
 exports.findPosts = (query, cb) => {
     
     Post.find(query, (err, posts) => {
-        if (err) return cb(new ErrorHandler(500, 'database_error'))
+        if (err) return cb(new ErrorHandler(500, 'cannot_find_post(s)'))
 
         return cb(null, posts)
     })
@@ -107,7 +120,7 @@ exports.findPosts = (query, cb) => {
 exports.updatePost = (postId, update, cb) => {
 
     Post.findByIdAndUpdate({_id: postId}, {$set: update}, {new: true}, (err, updatedPost) => {
-        if(err) return cb(new ErrorHandler(500, 'database_error'))
+        if(err) return cb(new ErrorHandler(500, 'cannot_update_post_' + postId))
 
         return cb(null, updatedPost)
     })
@@ -116,7 +129,7 @@ exports.updatePost = (postId, update, cb) => {
 exports.deletePost = (postId, cb) => {
 
     Post.findByIdAndRemove(postId, (err, deletedPost) => {
-        if(err) return cb(new ErrorHandler(500, 'database_error'))
+        if(err) return cb(new ErrorHandler(500, 'cannot_delete_post_' + postId))
 
         return cb(null, deletedPost)
     })
@@ -129,7 +142,13 @@ exports.insertComment = (commentInfo, cb) => {
     var comment = new PostComment(commentInfo)
 
     comment.save((err, cmt) => {
-        if (err) return cb(new ErrorHandler(500, 'database_error'))
+        if(err){
+            if(err.code == 11000 && err.keyValue) return cb(new ErrorHandler(400, 'user_already_commented'))
+
+            else if(err.errors) return cb(new ErrorHandler(400, 'fill_all_required_fields'))
+
+            else return cb(new ErrorHandler(500, 'database_error'))
+        } 
 
         return cb(null, cmt)
     })
@@ -138,7 +157,7 @@ exports.insertComment = (commentInfo, cb) => {
 exports.findComment = (commentId, cb) => {
 
     PostComment.findById(commentId, (err, comment) => {
-        if (err) return cb(new ErrorHandler(500, 'database_error'))
+        if (err) return cb(new ErrorHandler(500, 'cannot_find_comment' + comment))
 
         return cb(null, comment)
     })
@@ -147,7 +166,7 @@ exports.findComment = (commentId, cb) => {
 exports.findPostComments = (postId, cb) => {
 
     PostComment.find({postId: postId}, (err, comments) => {
-        if (err) return cb(new ErrorHandler(500, 'database_error'))
+        if (err) return cb(new ErrorHandler(500, 'cannot_find_comments_of_post_' + postId))
 
         return cb(null, comments)
     })
@@ -155,8 +174,8 @@ exports.findPostComments = (postId, cb) => {
 
 exports.updateComment = (commentId, update, cb) => {
 
-    PostComment.findByIdAndUpdate(commentId, update, (err, updatedComment) => {
-        if (err) return cb(new ErrorHandler(500, 'database_error'))
+    PostComment.findByIdAndUpdate(commentId, update, {new: true}, (err, updatedComment) => {
+        if (err) return cb(new ErrorHandler(500, 'cannot_update_comment_' + commentId))
 
         return cb(null, updatedComment) 
     })
@@ -165,7 +184,7 @@ exports.updateComment = (commentId, update, cb) => {
 exports.deleteComment = (commentId, cb) => {
 
     PostComment.findByIdAndRemove(commentId, (err, deletedComment) => {
-        if (err) return cb(new ErrorHandler(500, 'database_error'))
+        if (err) return cb(new ErrorHandler(500, 'cannot_delete_comment_' + commentId))
 
         return cb(null, deletedComment)
     })
@@ -176,7 +195,7 @@ exports.deleteComment = (commentId, cb) => {
 exports.findLike = (postId, userId, cb) => {
 
     PostLike.findOne({postId: postId, userId: userId}, (err, postLike) => {
-        if (err) return cb(new ErrorHandler(500, 'database_error'))
+        if (err) return cb(new ErrorHandler(500, 'cannot_find_like_of_post_' + postId))
 
         return cb(null, postLike)
     })
@@ -187,7 +206,7 @@ exports.insertLike = (postLikeInfo, cb) => {
     var postLike = new PostLike(postLikeInfo)
 
     postLike.save((err, pstLike) => {
-        if (err) return cb(new ErrorHandler(500, 'database_error'))
+        if(err) return cb(new ErrorHandler(500, 'database_error'))
 
         return cb(null, pstLike)
     })
@@ -197,7 +216,7 @@ exports.insertLike = (postLikeInfo, cb) => {
 exports.deleteLike = (likeId, cb) => {
 
     PostLike.findByIdAndRemove(likeId, (err, deletedLike) => {
-        if (err) return cb(new ErrorHandler(500, 'database_error'))
+        if (err) return cb(new ErrorHandler(500, 'cannot_delete_like_' + likeId))
 
         return cb(null, deletedLike)
     })

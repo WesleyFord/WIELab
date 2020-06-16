@@ -1,5 +1,6 @@
 const dbService = require('../services/database.service')
 const photoService = require('../services/photo.service')
+const ErrorHandler = require('../helpers/error.handler')
 
 exports.createProfile = (req, res, next) => {
 
@@ -27,6 +28,10 @@ exports.createProfile = (req, res, next) => {
 }
 
 exports.updatePassword = (req, res, next) => {
+
+    if(!req.body.newPassword){
+        return next(new ErrorHandler(400, 'new_password_must_be_given'))
+    }
     
     var newPassword = req.body.newPassword
     req.user.oldPassword = req.user.password
@@ -73,7 +78,7 @@ exports.readProfilePhoto = (req, res, next) => {
             if(profile){
                 return res.sendFile(profile.profilePicture)
         }      
-        else return res.status(500).send({message: 'server_error'})
+        else return next(new ErrorHandler(500, 'server_error'))
     })
 }
 
@@ -91,7 +96,7 @@ exports.readUsersProfilePhoto = (req, res, next) => {
             if(profile){
                 return res.sendFile(profile.profilePicture)
         }      
-        else return res.status(500).send({message: 'server_error'})
+        else return next(new ErrorHandler(500, 'server_error'))
     })
 }
 
@@ -114,12 +119,12 @@ exports.deleteProfilePhoto = (req, res, next) => {
                 }
             })
         } else if (!profile){
-            return res.send({message: 'profile_not_found'})
+            return next(new ErrorHandler(400, 'profile_not_found'))
 
         } else if (!profile.profilePicture){    
-            return res.send({message: 'no_picture_to_delete'})
+            return next(new ErrorHandler(400, 'no_picture_to_delete'))
             
-        } else return res.send({message: 'server_error'})
+        } else return next(new ErrorHandler(500, 'server_error'))
     })
 }
 
@@ -141,7 +146,7 @@ exports.updateProfile = (req, res, next) => {
                 return res.send({message: 'profile_updated', updatedProfile: updatedProfile})
             })
         } else if(!profile){
-            return res.send({message: 'profile_not_found'})
+            return next(new ErrorHandler(400, 'profile_not_found'))
         }
     })
     
