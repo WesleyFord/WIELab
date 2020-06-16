@@ -174,7 +174,7 @@ exports.renderPost = (req, res, next) => {
     /* return res.send(`render selected post: ${req.post}
                     with comments: ${req.post.comments}`) */
 
-        return res.render('single-post-view', {post: req.post})
+        return res.render('single-post-view', {post: req.post, comments: req.post.comments})
 
 }
 

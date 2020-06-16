@@ -1,7 +1,7 @@
 const passport = require('passport')
 const dbService = require('../services/database.service')
 const jwt = require('jsonwebtoken')
-const bcrypt = require('bcrypt')
+const ErrorHandler = require('../helpers/error.handler')
 
 exports.register = (req, res, next) => {
     var userInfo = {
@@ -26,7 +26,7 @@ exports.login = (req, res, next) => {
 
         if(err) return next(err)
 
-        if(!user) return res.status(402).send(info)
+        if(!user) return next(new ErrorHandler(400, info.message))
 
         req.logIn(user, function(err){
             if (err) return next(err)
@@ -52,12 +52,12 @@ exports.createToken = (req, res, next) => {
     dbService.findUserByEmail(email, (err, user) => {
         if (err) return next(err)
 
-        if (!user) return res.send('user_not_found')
+        if (!user) return next(new ErrorHandler(400, 'user_not_found'))
 
         jwt.sign(user.email, process.env.SECRET, (err, token) => {
             if (err) return next(err)
 
-            if (!token) return next(new Error({message: 'failed_to_create_token'}))
+            if (!token) return next(new ErrorHandler(500, 'failed_to_create_token'))
 
             req.token = token
 
@@ -72,9 +72,9 @@ exports.verifyToken = (req, res, next) => {
     var token = req.params.token
 
     jwt.verify(token, process.env.SECRET, (err, email) => {
-        if (err) return next(err)
+        if (err) return next(new ErrorHandler(500, 'failed_to_verify_token'))
 
-        if(!email) return next(new Error({message: 'failed_to_verify_token'}))
+        if(!email) return next(new ErrorHandler(403, 'user_not_found'))
 
         req.email = email
 
@@ -89,7 +89,7 @@ exports.changePassword = (req, res, next) => {
     dbService.findUserByEmail(req.email, (err, user) => {
         if (err) return next(err)
 
-        if(!user) return next(new Error({message: 'user_not_found'}))
+        if(!user) return next(new ErrorHandler(400, 'user_not_found'))
 
         user.password = newPassword
 
