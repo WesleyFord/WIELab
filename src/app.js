@@ -23,11 +23,11 @@ app.use(cors())
 app.use(express.static(path.join(__dirname, '..', 'public')))
 //Configuration: express-fileupload
 app.use(fileUpload())
-//Configuration: errorHandler
-//app.use('*', require('./services/errorhandler.mw').errorHandler)
 //Configuration: routers
 app.use(require('./routes/auth.router'))
 app.use(require('./routes/main.router'))
+//Configuration: error handler
+require('./controllers/error.controller')(app)
 //Configuration: ejs
 app.set('views', path.join(__dirname, '../views'))
 app.set('view engine', 'ejs')

@@ -14,7 +14,7 @@ exports.createProfile = (req, res, next) => {
     }
 
     dbService.insertProfile(profileInfo, (err, profile) => {
-        if(err) next(err)
+        if(err) return next(err)
 
         if(profile){
             

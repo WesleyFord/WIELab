@@ -210,3 +210,8 @@ exports.renderSearchResults = (req, res, next) => {
 
     return res.send({message: 'search_results', results: req.search.results})
 }
+
+exports.render404 = (req, res, next) => {
+
+    return res.send('render 404')
+}

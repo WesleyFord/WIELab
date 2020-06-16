@@ -1,11 +1,12 @@
 const nodemailer = require('nodemailer')
+const ErrorHandler = require('../helpers/error.handler')
 
 var transporter = nodemailer.createTransport({
     host: 'smtp-mail.outlook.com',
     secureConnection: false,
     port: 587,
     auth: {
-        user: process.env.EMAIL_ADDRESS,
+        user: /* process.env.EMAIL_ADDRESS */1,
         pass: process.env.EMAIL_PASSWORD
     },
     tls: {
@@ -24,9 +25,9 @@ exports.welcome = (req, res, next) => {
     }
 
     transporter.sendMail(msg, (err, info) => {
-        if (err) return next(err)
+        if (err) return next(new ErrorHandler(500, 'failed_to_send_mail'))
 
-        return res.send({message: 'registration_complete_mail_sent', info: info.response})
+        return res.send({message: 'registration_complete_mail_sent'})
     })
 }
 
@@ -44,7 +45,7 @@ exports.forgotPassword = (req, res, next) => {
     }
 
     transporter.sendMail(msg, (err, info) => {
-        if (err) return next(err)
+        if (err) return next(new ErrorHandler(500, 'failed_to_send_mail'))
 
         return res.send({message: 'reset_password_mail_sent', info: info.response})
     })
@@ -61,7 +62,7 @@ exports.changePassword = (req, res, next) => {
     }
 
     transporter.sendMail(msg, (err, info) => {
-        if (err) return next(err)
+        if (err) return next(new ErrorHandler(500, 'failed_to_send_mail'))
 
         return res.send({message: 'change_password_mail_sent', info: info.response})
     })
