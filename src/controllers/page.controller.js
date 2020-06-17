@@ -101,7 +101,7 @@ exports.renderProfile = (req, res, next) => {
 
     */
  
-    return res.send('render user profile page')
+    return res.render('profile', {user: req.user, profile: req.user.profile})
 }
 
 exports.renderProfileCreate = (req, res, next) => {
@@ -213,5 +213,5 @@ exports.renderSearchResults = (req, res, next) => {
 
 exports.render404 = (req, res, next) => {
 
-    return res.send('render 404')
+    return res.render('404')
 }
