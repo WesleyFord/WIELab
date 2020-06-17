@@ -20,7 +20,8 @@ app.use(bodyParser.json())
 //Configuration: cors
 app.use(cors())
 //Configuration: express-static
-app.use(express.static(path.join(__dirname, '..', 'public')))
+app.use('/public', express.static(path.join(__dirname, '../public')))
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')))
 //Configuration: express-fileupload
 app.use(fileUpload())
 //Configuration: routers
