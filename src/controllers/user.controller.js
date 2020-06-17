@@ -1,10 +1,9 @@
+const path = require('path')
 const dbService = require('../services/database.service')
 const photoService = require('../services/photo.service')
 const ErrorHandler = require('../helpers/error.handler')
 
 exports.createProfile = (req, res, next) => {
-
-    //TODO: Error handling for key duplication
     
     var profileInfo = {
         userId: req.user._id,
@@ -46,18 +45,15 @@ exports.updatePassword = (req, res, next) => {
 
 exports.uploadProfilePhoto = (req, res, next) => {
 
-    photoService.uploadUserPhoto(req, (err, path) => {
+    photoService.uploadUserPhoto(req, (err, filename) => {
         if (err) return next(err)
 
         dbService.findProfile(req.user._id, (err, profile) => {
             if(err) return next(err)
 
             if(profile){
-                var update = {
-                    profilePicture: path
-                }
 
-                dbService.updateProfile(profile._id, update, (err, updatedProfile) => {
+                dbService.updateProfile(profile._id,{profilePicture: filename }, (err, updatedProfile) => {
                     if(err) return next(err)
                     return res.send({message: 'picture_uploaded', updatedProfile: updatedProfile})
                 })
@@ -76,7 +72,7 @@ exports.readProfilePhoto = (req, res, next) => {
 
         } else
             if(profile){
-                return res.sendFile(profile.profilePicture)
+                return res.send('/uploads/user/' + profile.profilePicture)
         }      
         else return next(new ErrorHandler(500, 'server_error'))
     })
@@ -94,7 +90,7 @@ exports.readUsersProfilePhoto = (req, res, next) => {
 
         } else
             if(profile){
-                return res.sendFile(profile.profilePicture)
+                return res.send('/uploads/user/' + profile.profilePicture)
         }      
         else return next(new ErrorHandler(500, 'server_error'))
     })
@@ -106,12 +102,13 @@ exports.deleteProfilePhoto = (req, res, next) => {
         if(err) return next(err)
 
         if(profile && profile.profilePicture){
-            
-            photoService.deletePhoto(profile.profilePicture, (err, isDeleted) => {
+            let filepath = path.join(__dirname, '../../uploads/user', profile.profilePicture)
+
+            photoService.deletePhoto(filepath, (err, isDeleted) => {
                 if (err) return next(err)
 
                 if(isDeleted){
-                    dbService.updateProfile(profile._id, {profilePicture: null}, (err, updatedProfile) => {
+                    dbService.updateProfile(profile._id, {profilePicture: undefined}, (err, updatedProfile) => {
                         if (err) return next(err)
 
                         return res.send({message: 'picture_deleted', updatedProfile: updatedProfile})

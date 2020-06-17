@@ -1,8 +1,7 @@
+const path = require('path')
 const dbService = require('../services/database.service')
 const photoService = require('../services/photo.service')
-const { db } = require('../models/user.model')
 const ErrorHandler = require('../helpers/error.handler')
-const { Error } = require('mongoose')
 
 exports.createPost = (req, res, next) => {
 
@@ -29,10 +28,10 @@ exports.uploadPostPhoto = (req, res, next) => {
         if (err) return next(err)
 
         if(post){
-            photoService.uploadPostPhoto(req, (err, path) => {
+            photoService.uploadPostPhoto(req, (err, filename) => {
                 if (err) return next(err)
 
-                dbService.updatePost(postId, {picture: path}, (err, updatedPost) => {
+                dbService.updatePost(postId, {picture: filename}, (err, updatedPost) => {
                     if (err) return next(err)
 
                     return res.send({message: 'photo_uploaded', updatedPost: updatedPost})
@@ -53,7 +52,7 @@ exports.readPostPhoto = (req, res, next) => {
         if (err) return next(err)
 
         if(post && post.picture){
-            return res.sendFile(post.picture)
+            return res.send('/uploads/post/' + post.picture)
 
         } else if (!post) {
             return next(new ErrorHandler(403, 'post_not_found'))
@@ -73,12 +72,13 @@ exports.deletePostPhoto = (req, res, next) => {
         if (err) return next(err)
         
         if(post && post.picture){
+            let filepath = path.join(__dirname, '../../uploads/post/', post.picture)
             
-            photoService.deletePhoto(post.picture, (err, isDeleted) => {
+            photoService.deletePhoto(filepath, (err, isDeleted) => {
                 if (err) return next(err)
 
                 if(isDeleted){
-                    dbService.updatePost(postId, {picture: null}, (err, updatedPost) => {
+                    dbService.updatePost(postId, {picture: undefined}, (err, updatedPost) => {
                         if (err) return next(err)
 
                         return res.send({message: 'picture_deleted', updatedPost: updatedPost})

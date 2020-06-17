@@ -12,11 +12,12 @@ exports.uploadUserPhoto = (req, cb) => {
 
         if(file.mimetype == 'image/jpeg'){
             let uploadpath = path.join(__dirname, '../../uploads/user/')
-            let filepath = uploadpath + req.user._id + '.' + file.name.split('.')[1]
+            let filename = req.user._id + '.' + file.name.split('.')[1]
+            let filepath = uploadpath + filename
 
             file.mv(filepath, function (err) {
                 if (err) return cb(new ErrorHandler(500, 'server_error'))
-                return cb(null, filepath)
+                return cb(null, filename)
             })
         } else return cb(new ErrorHandler(403, 'wrong_mimetype'))  
     }
@@ -32,11 +33,12 @@ exports.uploadPostPhoto = (req, cb) => {
 
         if(file.mimetype == 'image/jpeg'){
             let uploadpath = path.join(__dirname, '../../uploads/post/')
-            let filepath = uploadpath + req.params.postId + '.' + file.name.split('.')[1]
+            let filename = req.params.postId + '.' + file.name.split('.')[1]
+            let filepath = uploadpath + filename
 
             file.mv(filepath, function(err) {
                 if(err) return cb(new ErrorHandler(500, 'server_error'))
-                return cb(null, filepath)
+                return cb(null, filename)
             })
         } else return cb(new ErrorHandler(403, 'wrong_mimetype'))
     }
