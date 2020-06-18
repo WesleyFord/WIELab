@@ -1,17 +1,7 @@
 <!doctype html>
 <html lang="en">
 	<head>
-		<meta charset="utf-8">
-		<meta name="viewport"
-			content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<meta name="description" content="Web and Internet Engineering Project">
-		<meta name="author" content="Milena Maul, Enes Varcan, and Wes Ford">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-		<link rel="stylesheet" href="styles.css">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-		<title>Code Rage</title>
+		<%- include('./partials/head')  %> 
 	</head>
 <body class="home-page" id="page">
 	<div class="container-fluid" id="header">
@@ -31,7 +21,7 @@
 				<p style="font-size:4vw">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>	
 			</span>
 			<span class="col-md-6">
-				<img class="img-fluid m-0 m-md-2" src="code.jpg">
+				<img class="img-fluid m-0 m-md-2" src="/public/code.jpg">
 			</span>
 		</div>
 		<div class="row text-center m-4">
@@ -40,7 +30,7 @@
 		
 		<div id="regpage" class="modal">
 			<div class="modal-dialog modal-dialog-centered">
-				<form class="modal-content animate">
+				<form class="modal-content animate" method="POST" action="/register">
 					<div class="row mx-auto my-4">
 						<h1>Register</h1>
 					</div>
@@ -48,8 +38,11 @@
 						<input type="text" name="username" id="username" placeholder="username">
 					</div>
 					<div class="row mx-auto my-4">
-						<input type="password" name="password" id="password" placeholder="password">
+						<input type="email" name="email" id="email" placeholder="email">
 					</div>
+					<div class="row mx-auto my-4">
+						<input type="password" name="password" id="password" placeholder="password">
+					</div>	
 					<div class="row mx-auto my-4">
 						<button class="btn btn-primary">Sign up!</button>
 					</div>
@@ -59,7 +52,7 @@
 
 		<div id="loginpage" class="modal">
 			<div class="modal-dialog modal-dialog-centered">
-				<form class="modal-content animate">
+				<form class="modal-content animate" method="POST" action="/login">
 					<div class="row mx-auto my-4">
 						<h1>Log In</h1>
 					</div>

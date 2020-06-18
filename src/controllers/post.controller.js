@@ -160,7 +160,7 @@ exports.updatePost = (req, res, next) => {
             dbService.updatePost(postId, update, (err, updatedPost) => {
                 if(err) return next(err)
 
-                return res.send({message: 'post_updated', newPost: updatedPost})
+                return res.redirect('/post/' + updatedPost._id)
             })
         }
 

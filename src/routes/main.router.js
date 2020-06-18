@@ -9,7 +9,7 @@ const mailController = require('../controllers/mail.controller')
 router.use(function isAuthenticated(req, res, next) {
 
     if(!req.user){
-        return res.redirect('/login')
+        return res.redirect('/')
     }
     else if(req.user){
         dbService.findProfile(req.user._id, (err, profile) => {
@@ -68,7 +68,7 @@ router.get('/post/:postId', postController.readPost, postController.readAllComme
 
 router.get('/post/:postId/editPost', postController.readPost, pageController.renderPostEdit)
 
-router.patch('/post/:postId/editPost', postController.updatePost)
+router.post('/post/:postId/editPost', postController.updatePost)
 
 router.delete('/post/:postId', postController.deletePost)
 

@@ -6,7 +6,7 @@ var transporter = nodemailer.createTransport({
     secureConnection: false,
     port: 587,
     auth: {
-        user: /* process.env.EMAIL_ADDRESS */1,
+        user: process.env.EMAIL_ADDRESS,
         pass: process.env.EMAIL_PASSWORD
     },
     tls: {
@@ -25,9 +25,9 @@ exports.welcome = (req, res, next) => {
     }
 
     transporter.sendMail(msg, (err, info) => {
-        if (err) return next(new ErrorHandler(500, 'failed_to_send_mail'))
+        //if (err) return next(new ErrorHandler(500, 'failed_to_send_mail'))
 
-        return res.send({message: 'registration_complete_mail_sent'})
+        return res.redirect('/')
     })
 }
 

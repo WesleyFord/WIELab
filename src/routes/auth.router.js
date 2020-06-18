@@ -2,6 +2,7 @@ const router = require('express').Router()
 const authController = require('../controllers/auth.controller')
 const pageController = require('../controllers/page.controller')
 const mailController = require('../controllers/mail.controller')
+const postController = require('../controllers/post.controller')
 
 function isAuthenticated(req, res, next) {
     if(req.user){
@@ -12,11 +13,11 @@ function isAuthenticated(req, res, next) {
 
 router.get('/', pageController.renderIndex)
 
-router.get('/login', isAuthenticated, pageController.renderLogin)
+//router.get('/login', isAuthenticated, pageController.renderLogin)
 
 router.post('/login', isAuthenticated, authController.login)
 
-router.get('/register', isAuthenticated, pageController.renderRegister)
+//router.get('/register', isAuthenticated, pageController.renderRegister)
 
 router.post('/register', isAuthenticated, authController.register, mailController.welcome)
 

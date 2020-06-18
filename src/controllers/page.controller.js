@@ -73,7 +73,11 @@ exports.renderIndex = (req, res, next) => {
     */
 
     //render index page
-    return res.render('index', {user: req.user})
+    if(!req.user){
+        return res.render('home')
+    } else{
+        return res.redirect('/posts')
+    }
 
 }
 
@@ -136,7 +140,7 @@ exports.renderUserPosts = (req, res, next) => {
                 }
     */
 
-    return res.send({message: 'user posts', posts: req.user.posts})
+    return res.render('overview-user', {user: req.user, profile: req.user.profile, posts: req.user.posts})
 }
 
 //Post
@@ -149,9 +153,8 @@ exports.renderAllPosts = (req, res, next) => {
     -req.posts -> JavaScript object containing posts
                 foreach(post in posts)...
     */
-
-    return res.send(`render all posts\n${req.posts}\nuser profile:${req.user.profile}`)
-    //return res.render('overview', {user: req.user, posts: req.posts})
+    console.log(req.user.profile)
+    return res.render('overview', {user: req.user, profile: req.user.profile, posts: req.posts})
 
 }
 
@@ -173,7 +176,7 @@ exports.renderPost = (req, res, next) => {
     /* return res.send(`render selected post: ${req.post}
                     with comments: ${req.post.comments}`) */
 
-        return res.render('single-post-view', {post: req.post, comments: req.post.comments})
+        return res.render('single-post-view', {user: req.user, profile: req.user.profile, post: req.post, comments: req.post.comments})
 
 }
 
@@ -181,7 +184,7 @@ exports.renderPostEdit = (req, res, next) => {
 
     //Post needed
     // -req.post
-    return res.send({message: 'render edit post page', post: req.post})
+    return res.render('edit-post', {user: req.user, profile:req.user.profile, post: req.post})
 
 }
 
