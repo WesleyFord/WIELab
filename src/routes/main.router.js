@@ -1,4 +1,5 @@
 const router = require('express').Router()
+const dbService  =require('../services/database.service')
 const pageController = require('../controllers/page.controller')
 const userController = require('../controllers/user.controller')
 const postController = require('../controllers/post.controller')
@@ -10,13 +11,28 @@ router.use(function isAuthenticated(req, res, next) {
     if(!req.user){
         return res.redirect('/login')
     }
+    else if(req.user){
+        dbService.findProfile(req.user._id, (err, profile) => {
+            if (err) return next(err)
 
-    next()
+            if(!profile){
+                req.user.profile = {
+                    userId: req.user._id,
+                    email: req.user.email,
+                    profilePicture: 'default.jpg'
+                }
+            }
+            else {
+                req.user.profile = profile
+            }
+            next()   
+        })
+    }
 })
 
 //User
 
-router.get('/user', userController.readProfile, pageController.renderProfile)
+router.get('/user', pageController.renderProfile)
 
 router.get('/user/createProfile', pageController.renderProfileCreate)
 
