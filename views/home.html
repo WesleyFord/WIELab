@@ -21,7 +21,7 @@
 			</div>
 			<div class="btn-toolbar col-md-8 col-6 m-auto d-flex justify-content-end">
 				<button id="register" onclick="document.getElementById('regpage').style.display='block'" class="btn btn-outline-secondary btn-sml m-2">Register</button>
-				<button id="login" class="btn btn-custom btn-sml m-2">Log In</button>
+				<button id="login" onclick="document.getElementById('loginpage').style.display='block'" class="btn btn-custom btn-sml m-2">Log In</button>
 			</div>
 		</div>
 	</div>
@@ -45,10 +45,10 @@
 						<h1>Register</h1>
 					</div>
 					<div class="row mx-auto my-4">
-						<input type="text" placeholder="username">
+						<input type="text" name="username" id="username" placeholder="username">
 					</div>
 					<div class="row mx-auto my-4">
-						<input type="password" placeholder="password">
+						<input type="password" name="password" id="password" placeholder="password">
 					</div>
 					<div class="row mx-auto my-4">
 						<button class="btn btn-primary">Sign up!</button>
@@ -56,14 +56,37 @@
 				</form>
 			</div>
 		</div>
+
+		<div id="loginpage" class="modal">
+			<div class="modal-dialog modal-dialog-centered">
+				<form class="modal-content animate">
+					<div class="row mx-auto my-4">
+						<h1>Log In</h1>
+					</div>
+					<div class="row mx-auto my-4">
+						<input type="text" name="username" id="username" placeholder="username">
+					</div>
+					<div class="row mx-auto my-4">
+						<input type="password" name="password" id="password" placeholder="password">
+					</div>
+					<div class="row mx-auto my-4">
+						<button class="btn btn-primary">Log In</button>
+					</div>
+				</form>
+			</div>
+		</div>
 	</div>
 	
 	<script>
-			var modal = document.getElementById('regpage');
-			
+			var regmodal = document.getElementById('regpage');
+			var loginmodal = document.getElementById('loginpage');
+
 			window.onclick = function(event) {
-				if (event.target == modal) {
-					modal.style.display = 'none';
+				if (event.target == regmodal) {
+					regmodal.style.display = 'none';
+				}
+				if (event.target == loginmodal) {
+					loginmodal.style.display = 'none';
 				}
 			}
 		</script>
