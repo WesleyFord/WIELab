@@ -56,20 +56,35 @@
 				</div>
 				<div class="row blog-teaser">
 					<div class="col-12">
-						<h2 class="blog-hl">headline</h2>
+						<h2 class="blog-hl"><%= post.header %></h2>
 					</div>
 					<div class="col-md-12">
 						<img class="blog-img blog-img-inline p-0" src="code.jpg">
 						<p>
-							Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. 
+							<%= post.text %>
 						</p>
 						<p>
-							Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. 
+							<%= post.text %>
 						</p>
+					</div>
+				</div>
+				<div class="row">
+					<textarea class="form-control col-12" rows="4"></textarea>
+				</div>
+				
+				<div class ="row blog-teaser"><div class="my-auto mx-3 custom-profile">
+					<a href="#">
+						<img class="profile-img" src="code.jpg">
+						<span>profile here</span>
+					</a>
+				</div>
+					<div class="col-12">
+						<p class="comment-text"><%=comment.body></p>
 					</div>
 				</div>
 			</div>
 		</div>
 	</body>
 </html>
+	
 	
