@@ -17,7 +17,7 @@ exports.insertUser = (userInfo, cb) => {
     var user = new User(userInfo)
 
     user.save((err, usr) => {
-        if (err.code = 11000) {
+        if (err && err.code == 11000) {
             if(err.keyValue){
                 return cb(new ErrorHandler(400, 'username_is_taken'))
             } else if(err.errors){
@@ -53,7 +53,7 @@ exports.insertProfile = (profileInfo, cb) => {
     var userProfile = new UserProfile(profileInfo)
 
     userProfile.save((err, usrProfile) => {
-        if (err.code = 11000) {
+        if (err && err.code == 11000) {
             if(err.keyValue){
                 return cb(new ErrorHandler(400, 'profile_already_created'))
             } else if(err.errors){
@@ -90,7 +90,7 @@ exports.insertPost = (postInfo, cb) => {
     var post = new Post(postInfo)
 
     post.save((err, pst) => {
-        if(err.code == 11000 && err.errors){
+        if(err && err.code == 11000 && err.errors){
             return cb(new ErrorHandler(400, 'fill_all_required_fields'))
 
         } else if(err) return cb(new ErrorHandler(500, 'database_error'))
@@ -142,13 +142,11 @@ exports.insertComment = (commentInfo, cb) => {
     var comment = new PostComment(commentInfo)
 
     comment.save((err, cmt) => {
-        if(err){
-            if(err.code == 11000 && err.keyValue) return cb(new ErrorHandler(400, 'user_already_commented'))
+        if(err && err.code == 11000 && err.keyValue) return cb(new ErrorHandler(400, 'user_already_commented'))
 
-            else if(err.errors) return cb(new ErrorHandler(400, 'fill_all_required_fields'))
+        else if(err && err.errors) return cb(new ErrorHandler(400, 'fill_all_required_fields'))
 
-            else return cb(new ErrorHandler(500, 'database_error'))
-        } 
+        else return cb(new ErrorHandler(500, 'database_error'))
 
         return cb(null, cmt)
     })
