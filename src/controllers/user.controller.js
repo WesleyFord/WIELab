@@ -10,7 +10,8 @@ exports.createProfile = (req, res, next) => {
         email: req.user.email,
         name: req.body.name,
         interestedIn: req.body.interestedIn,
-        bio: req.body.bio
+        bio: req.body.bio,
+        profilePicture: 'default.jpg'
     }
 
     dbService.insertProfile(profileInfo, (err, profile) => {

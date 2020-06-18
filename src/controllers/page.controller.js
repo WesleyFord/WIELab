@@ -40,7 +40,7 @@ exports.renderRegister = (req, res, next) => {
 
     //No data needed to render this page
 
-    return res.send('render register page')
+    return res.render('register')
 }
 
 exports.renderForgotPassword = (req, res, next) => {
@@ -100,7 +100,6 @@ exports.renderProfile = (req, res, next) => {
                     .timestamp: Date, time of creation of the profile
 
     */
- 
     return res.render('profile', {user: req.user, profile: req.user.profile})
 }
 
@@ -108,7 +107,7 @@ exports.renderProfileCreate = (req, res, next) => {
 
     //No data needed
 
-    return res.send('render user profile creation page')
+    return res.render('create-profile')
 }
 
 exports.renderProfileEdit = (req, res, next) => {
@@ -151,8 +150,8 @@ exports.renderAllPosts = (req, res, next) => {
                 foreach(post in posts)...
     */
 
-    //return res.send(`render all posts\n${req.posts}`)
-    return res.render('overview', {posts: req.posts})
+    return res.send(`render all posts\n${req.posts}\nuser profile:${req.user.profile}`)
+    //return res.render('overview', {user: req.user, posts: req.posts})
 
 }
 
