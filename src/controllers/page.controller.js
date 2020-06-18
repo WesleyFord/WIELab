@@ -153,7 +153,6 @@ exports.renderAllPosts = (req, res, next) => {
     -req.posts -> JavaScript object containing posts
                 foreach(post in posts)...
     */
-    console.log(req.user.profile)
     return res.render('overview', {user: req.user, profile: req.user.profile, posts: req.posts})
 
 }
