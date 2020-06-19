@@ -44,11 +44,11 @@ router.get('/users/:userId/profilePicture', userController.readUsersProfilePhoto
 
 router.post('/user/uploadProfilePicture', userController.uploadProfilePhoto)
 
-router.delete('/user/deleteProfilePicture', userController.deleteProfilePhoto)
+router.get('/user/deleteProfilePicture', userController.deleteProfilePhoto)
 
 router.get('/user/editProfile', userController.readProfile ,pageController.renderProfileEdit)
 
-router.patch('/user/editProfile', userController.updateProfile)
+router.post('/user/editProfile', userController.updateProfile)
 
 router.get('/user/changePassword', pageController.renderChangePassword)
 
@@ -70,7 +70,7 @@ router.get('/post/:postId/editPost', postController.readPost, pageController.ren
 
 router.post('/post/:postId/editPost', postController.updatePost)
 
-router.delete('/post/:postId', postController.deletePost)
+router.get('/post/:postId/deletePost', postController.deletePost)
 
 router.get('/posts/createNewPost', postController.createPost)
 
@@ -78,7 +78,7 @@ router.get('/post/:postId/photo', postController.readPostPhoto)
 
 router.post('/post/:postId/uploadPhoto', postController.uploadPostPhoto)
 
-router.delete('/post/:postId/deletePicture', postController.deletePostPhoto)
+router.get('/post/:postId/deletePicture', postController.deletePostPhoto)
 
 //Comment
 
@@ -88,11 +88,15 @@ router.post('/post/:postId/comment/writeComment', postController.createComment)
 
 router.get('/post/:postId/comment/:commentId', postController.readComment, pageController.renderComment)
 
-router.patch('/post/:postId/comment/:commentId/editComment', postController.updateComment)
+router.post('/post/:postId/comment/:commentId/editComment', postController.updateComment)
 
-router.delete('/post/:postId/comment/:commentId/deleteComment', postController.deleteComment)
+router.get('/post/:postId/comment/:commentId/deleteComment', postController.deleteComment)
 
 //Like
+
+router.get('/post/:postId/likes', postController.getLikeCount)
+
+router.get('/post/:postId/likeStatus', postController.getLikeStatus)
 
 router.post('/post/:postId/like', postController.changeLikeStatus)
 
