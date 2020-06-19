@@ -103,7 +103,7 @@ exports.deleteProfilePhoto = (req, res, next) => {
         if(err) return next(err)
 
         if(profile && profile.profilePicture){
-            let filepath = path.join(__dirname, '../../uploads/user', profile.profilePicture)
+            let filepath = path.join(__dirname, '../../uploads/user/', profile.profilePicture)
 
             photoService.deletePhoto(filepath, (err, isDeleted) => {
                 if (err) return next(err)
