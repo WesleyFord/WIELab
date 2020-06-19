@@ -16,7 +16,11 @@
 						<div class="col-md-8">
 							<h2 class="blog-hl"><%=posts[post].header%></h2>
 							<p>
-								<%=posts[post].text%>
+								<% if(posts[post].text.length > 350) { %>
+									<%= posts[post].text.substr(0, 350) + '...' %> 
+								<% } else { %>
+									<%= posts[post].text %>  
+								<% } %> 
 							</p>
 						</div>
 						<div class="col-md-4">
