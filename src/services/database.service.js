@@ -199,6 +199,15 @@ exports.findLike = (postId, userId, cb) => {
     })
 }
 
+exports.findLikes = (postId, cb) => {
+
+    PostLike.find({postId: postId}, (err, postLikes) => {
+        if (err) return cb(new ErrorHandler(500, 'cannot_find_likes_of_post_' + postId))
+
+        return cb(null, postLikes)
+    })
+}
+
 exports.insertLike = (postLikeInfo, cb) => {
 
     var postLike = new PostLike(postLikeInfo)
