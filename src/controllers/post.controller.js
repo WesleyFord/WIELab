@@ -194,6 +194,8 @@ exports.deletePost = (req, res, next) => {
 
 }
 
+//Comment
+
 exports.createComment = (req, res, next) => {
 
     var userId = req.user._id
@@ -293,6 +295,8 @@ exports.deleteComment = (req, res, next) => {
     })
 }
 
+//Like
+
 exports.changeLikeStatus = (req, res, next) => {
 
     var postId = req.params.postId
@@ -330,4 +334,30 @@ exports.changeLikeStatus = (req, res, next) => {
         else return next(new ErrorHandler(500, 'server_error'))
     })
     
+}
+
+exports.getLikeStatus = (req, res, next) => {
+
+    var postId = req.params.postId
+    var userId = req.user._id
+
+    dbService.findLike(postId, userId, (err, postLike) => {
+        if(err) return next(err)
+
+        if(postLike) return res.send({message: 'likestatus', likeStatus: true})
+
+        else return res.send({message: 'likestatus', likeStatus: false})
+    })
+
+}
+
+exports.getLikeCount = (req, res, next) => {
+
+    var postId = req.params.postId
+
+    dbService.findLikes(postId, (err, postLikes) => {
+        if (err) return next(err)
+
+        return res.send({message: 'likes', postLikes: postLikes.length})
+    })
 }
