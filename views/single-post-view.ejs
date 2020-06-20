@@ -69,7 +69,7 @@
 					if(data.error){
 						$('#likeCount').text(data.error.message)
 					} else{
-						$('#likeCount').text(data.postLikes + ' likes')
+						$('#likeCount').text(data.postLikes + ((data.postLikes == 1) ? ' like' : ' likes'))
 					}
 				})
 			}
