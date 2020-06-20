@@ -184,8 +184,8 @@ exports.renderPostEdit = (req, res, next) => {
     //Post needed
     // -req.post
 
-    if(!req.post.userId.equals(req.user_id)) return res.redirect('/')
-    
+    if(!req.post.userId.equals(req.user._id)) return res.redirect('/')
+
     return res.render('edit-post', {user: req.user, profile:req.user.profile, post: req.post})
 
 }
