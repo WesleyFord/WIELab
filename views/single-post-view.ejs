@@ -19,7 +19,12 @@
 					<div class="col-12">
 						<h2 class="blog-hl"><%= post.header %></h2>
 					</div>
-					
+					<div class="col-12">
+						<a href=%/user/<%= user.userID>Author: <%= user%></a>
+					</div>
+					<div class="col-12">
+						<a href="#"><%= post.date%></a>
+					</div>
 					<div class="col-md-12">
 						<% if(post.picture){ %>
 							<img class="blog-img blog-img-inline p-0" src="/uploads/post/<%= post.picture %> "> 
@@ -33,7 +38,21 @@
 						</p>
 						<button id="likeButton" class="btn btn-custom" onclick="changeLikeStatus()"></button>
 					</div>
+				</div>	
+				<div class="row blog-teaser">
+					<h2 style="margin:10px">Comments</h2>
+					<textarea class="form-control" style="margin:10px">Enter comment</textarea>
+					<button id="commentSubmit" class="btn btn-primary" style="margin:10px">Submit</button>			
 				</div>
+				<% for (const comment in comments){ %>
+					<div class="row blog-teaser">
+						<a href="/">
+							<img class="profile-img" src= "/uploads/user/<%= comment.author.profilePicture %> ">
+							<span> <%= comment.author %> </span>
+						</a>
+						<p class="col-12"><%= comment.text %></p>
+					</div>
+				<% } %>
 			</div>
 		</div>
 		<script>
