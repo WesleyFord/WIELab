@@ -3,17 +3,15 @@
 	<head>
 		<%- include('./partials/head')  %> 
 	</head>
-	<body class="single-page page">
-		<div class="container-fluid" id="header">	
-			<%- include('./partials/header')  %> 	
-		</div>
+	<body class="single-page page">	
+		<%- include('./partials/header')  %> 	
 		<div class="container-fluid" id="body">
 			<div class="container">
-				<% include('./partials/navigation') %> 
+				<%- include('./partials/navigation')  %> 
 				<div class="row blog-teaser">
 					<div class="col-12">
 						<% if(user._id.equals(post.userId)) { %> 
-							<a href="/post/<%= post._id %>/editPost "><button class="btn btn-custom">Edit Post</button></a>
+							<a class="custom-link" href="/post/<%= post._id %>/editPost ">>Edit Post</a>
 						<% } %> 
 					</div>
 					<div class="col-12">

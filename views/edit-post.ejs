@@ -4,16 +4,16 @@
 		<%- include('./partials/head')  %> 
 	</head>
 	<body class="single-page page">
-		<div class="container-fluid" id="header">	
-			<%- include('./partials/header') %> 		
-		</div>
+		<%- include('./partials/header') %> 		
 		<div class="container-fluid" id="body">
-			<div class="container pt-30">
+			<div class="container">
+				<%- include('./partials/navigation')  %> 
 				<form method="POST", action="/post/<%= post._id %>/editPost ">
 				<div class="row blog-teaser">
 						<div class="col-12 mt-4 mb-2">
 							<input type="text" name="header" placeholder="Headline" value="<%= post.header %>">
 						</div>
+<<<<<<< HEAD
 						<div class="col-12 my-2">
 							<!-- <button class="btn btn-custom" style="width:132px; margin-left: 0; position: absolute" >Choose image</button><span style="position: absolute; margin-left: 145px; margin-top: 12px;">display image name</span>
 							<input class="upload-btn" type="file" style="margin-top:8px; position:relative; opacity: 0;"> -->
@@ -23,11 +23,16 @@
 							</form>
 							<progress></progress> <!-- we can delete this -->
 							<p id="uploadAlert"></p>
+=======
+						<div class="col-12 mt-2 mb-3">
+							<button class="btn btn-custom btn-img">Choose image</button><span class="label-img">display image name</span>
+							<input class="upload-btn" type="file">
+>>>>>>> cb574c51602851466fc29b96c7762c728af3e7b9
 						</div>
 						<div class="col-md-12 my-2">
 							<textarea class="col-md-8 p-1" name="text" placeholder="Blog text"><%- post.text %></textarea>
 						</div>
-						<div class="col-12 mt-4 mb-2">
+						<div class="col-md-12 my-2">
 							<input type="text" name="keywords" placeholder="Keywords" value="<%= post.keywords %>">
 						</div>
 						<div class="col-md-12 mt-2 mb-4">

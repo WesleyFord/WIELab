@@ -10,7 +10,7 @@
 		<div class="container-fluid" id="body">
 			<div class="container">
 				<%- include('./partials/navigation')  %> 
-                <% for (const post in posts){ %>
+                <% for (const results in search_results){ %>
                     <a href="/post/<%= posts[post]._id %>"  target="_blank">
 					<div class="row blog-teaser">
 						<% if(posts[post].picture) {%> 
@@ -20,11 +20,7 @@
 						<% } %>
 							<h2 class="blog-hl"><%=posts[post].header%></h2>
 							<p>
-								<% if(posts[post].text.length > 350) { %>
-									<%= posts[post].text.substr(0, 350) + '...' %> 
-								<% } else { %>
-									<%= posts[post].text %>  
-								<% } %> 
+								<%=posts[post].text%>
 							</p>
 						</div>
 						<% if(posts[post].picture) {%> 

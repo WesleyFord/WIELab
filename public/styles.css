@@ -60,6 +60,10 @@ html,body {
 	background-color: #0066ff;
 }
 
+.custom-link {
+	text-decoration: underline;
+}
+
 /* search */
 @media (max-width: 785px) { 
 
@@ -159,4 +163,30 @@ html,body {
 
 .profile-page .blog-img-inline {
 	width: inherit;
+}
+
+/* Edit post
+-----------------------------------------------------*/
+.btn-img {
+	width: 132px; 
+	margin-left: 0; 
+	position: absolute;
+}
+
+.label-img {
+	position: absolute; 
+	margin-left: 145px; 
+	margin-top: 12px;
+}
+
+.upload-btn {
+	margin-top: 8px; 
+	position: relative; 
+	opacity: 0;
+}
+
+/* Edit post
+-----------------------------------------------------*/
+.error-message {
+	color: red;
 }
