@@ -184,3 +184,9 @@ html,body {
 	position: relative; 
 	opacity: 0;
 }
+
+/* Edit post
+-----------------------------------------------------*/
+.error-message {
+	color: red;
+}

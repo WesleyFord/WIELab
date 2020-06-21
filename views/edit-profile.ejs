@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<%- include('./partials/head')  %> 
+	</head>
+	<body class="single-page page">
+		<%- include('./partials/header') %> 		
+		<div class="container-fluid" id="body">
+			<div class="container">
+				<%- include('./partials/navigation')  %> 
+				<!-- exchange with editProfile; also exchange the values with the corresponding ones -->
+				<form method="POST", action="/post/<%= post._id %>/editPost ">
+				<div class="row blog-teaser">
+						<div class="col-12 mt-4 mb-2">
+							<input type="text" name="username" placeholder="Username" value="<%= post.header %>">
+						</div>
+						<div class="col-12 mt-2 mb-3">
+							<button class="btn btn-custom btn-img">Choose image</button><span class="label-img">display image name</span>
+							<input class="upload-btn" type="file">
+						</div>
+						<div class="col-12 mt-4 mb-2">
+							<input type="mail" name="mail" placeholder="Mail" value="<%= post.header %>">
+						</div>
+						<div class="col-12 mt-4 mb-2">
+							<input type="text" name="password" placeholder="Password" value="<%= post.header %>">
+						</div>
+						<div class="col-md-12 mt-2 mb-4">
+							<button class="btn btn-custom" type="submit">Submit</button>
+							<button class="btn btn-custom" type="reset">Reset</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<script>
+			function uploadPostPhoto(postId){
+				$.post('/post/' + postId + '/uploadPhoto', function(data){
+					console.log('uploaded')
+				})
+			}
+		</script>
+	</body>
+</html>
+	

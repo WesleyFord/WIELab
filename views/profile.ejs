@@ -7,9 +7,17 @@
         <%- include('./partials/header', {profile: profile}) %>
         
         <div class="container-fluid" id="body">
-			<div class="container pt-30">
+			<div class="container">
+				<%- include('./partials/navigation')  %> 
 				<div class="row settings-container">
 					<div class="col-md-12">
+						<!-- if -->
+						<div class="row">
+							<div class="col-12 mt-4">
+									<a class="custom-link mt-4" href="/ ">>Edit Profile</a>
+							</div>
+						</div>
+						<!-- end of if -->
 						<div class="row">
 							<div class="col-md-2 col-6">
 								<img class="blog-img blog-img-inline p-0 py-4" src="..\uploads\user\<%= profile.profilePicture %>">
