@@ -11,7 +11,7 @@
 			<div class="container">
 				<%- include('./partials/navigation')  %> 
                 <% for (const post in posts){ %>
-                    <a href="/post/<%= posts[post]._id %>"  target="_blank">
+                    <a href="/post/<%= posts[post]._id %>">
 					<div class="row blog-teaser">
 						<div class="col-md-8">
                             <h2 class="blog-hl"><%=posts[post].header%></h2>
