@@ -4,7 +4,7 @@
         <%- include('./partials/head') %>
     </head>
     <body>
-        <%- include('./partials/header', {profile: profile}) %>
+        <%- include('./partials/header') %>
         
         <div class="container-fluid" id="body">
 			<div class="container">
@@ -14,13 +14,13 @@
 						<!-- if -->
 						<div class="row">
 							<div class="col-12 mt-4">
-									<a class="custom-link mt-4" href="/ ">>Edit Profile</a>
+									<a class="custom-link mt-4" href="/user/editProfile">>Edit Profile</a>
 							</div>
 						</div>
 						<!-- end of if -->
 						<div class="row">
 							<div class="col-md-2 col-6">
-								<img class="blog-img blog-img-inline p-0 py-4" src="..\uploads\user\<%= profile.profilePicture %>">
+								<img class="blog-img blog-img-inline p-0 py-4" src="/uploads/user/<%= profile.profilePicture %>" width="100" >
 							</div>
 							<div class="col-md-10 col-6">
 								<h4 class="py-4"><%= profile.name %> </h4>
