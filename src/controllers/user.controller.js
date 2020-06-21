@@ -164,3 +164,19 @@ exports.readProfile = (req, res, next) => {
     })
 
 }
+
+exports.readUserProfiles = (req, res, next) => {
+
+    var userId = req.params.userId
+
+    dbService.findProfile(userId, (err, profile) => {
+        if (err) return next(err)
+
+        if(!profile){
+            return next(new ErrorHandler(404, 'profile_not_found'))
+        }
+        
+        req.profile = profile
+        next()
+    })
+}

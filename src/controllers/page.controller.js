@@ -104,7 +104,12 @@ exports.renderProfile = (req, res, next) => {
                     .timestamp: Date, time of creation of the profile
 
     */
-    return res.render('profile', {user: req.user, profile: req.user.profile})
+    return res.render('profile', {user: req.user, profile: req.user.profile, userProfile: req.user.profile})
+}
+
+exports.renderUserProfiles = (req, res, next) => {
+
+    return res.render('profile', {user: req.user, profile: req.user.profile, userProfile: req.profile})
 }
 
 exports.renderProfileCreate = (req, res, next) => {

@@ -7,6 +7,7 @@ exports.createPost = (req, res, next) => {
 
     var postInfo = {
         userId: req.user._id,
+        username: req.user.username,
         header: req.body.header,
         text: req.body.text,
         keywords: req.body.keywords,
@@ -203,6 +204,7 @@ exports.createComment = (req, res, next) => {
 
     var commentInfo = {
         userId: userId,
+        username: req.user.username,
         postId: postId,
         comment: req.body.comment
     }
@@ -210,7 +212,7 @@ exports.createComment = (req, res, next) => {
     dbService.insertComment(commentInfo, (err, comment) => {
         if(err) return next(err)
 
-        return res.send({message: 'comment_added', comment: comment})
+        return res.redirect('/post/'+postId)
     })
 
 }
