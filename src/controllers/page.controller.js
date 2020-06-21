@@ -119,7 +119,7 @@ exports.renderProfileEdit = (req, res, next) => {
     //User Profile object needed(to write default values to the input field)
     // -req.user.profile
 
-    return res.send('edit user profile')
+    return res.render('edit-profile', {user: req.user, profile: req.user.profile})
 }
 
 exports.renderUserPosts = (req, res, next) => {
@@ -212,7 +212,7 @@ exports.renderComment = (req, res, next) => {
 
 exports.renderSearchResults = (req, res, next) => {
 
-    return res.send({message: 'search_results', results: req.search.results})
+    return res.render('search', {user: req.user, profile: req.user.profile, term: req.query.q, results: req.search.results})
 }
 
 exports.render404 = (req, res, next) => {
