@@ -14,13 +14,9 @@
 							<input type="text" name="header" placeholder="Headline" value="<%= post.header %>">
 						</div>
 						<div class="col-12 my-2">
-							<!-- <button class="btn btn-custom" style="width:132px; margin-left: 0; position: absolute" >Choose image</button><span style="position: absolute; margin-left: 145px; margin-top: 12px;">display image name</span>
-							<input class="upload-btn" type="file" style="margin-top:8px; position:relative; opacity: 0;"> -->
 							<form enctype="multipart/form-data">
 								<input id="picture" name="picture" type="file" />
-								<input onclick="upload()" type="button" value="Upload" />
 							</form>
-							<progress></progress> <!-- we can delete this -->
 							<p id="uploadAlert"></p>
 						</div>
 						<div class="col-md-12 my-2">
@@ -30,7 +26,7 @@
 							<input type="text" name="keywords" placeholder="Keywords" value="<%= post.keywords %>">
 						</div>
 						<div class="col-md-12 mt-2 mb-4">
-							<button class="btn btn-custom" type="submit">Submit</button>
+							<button class="btn btn-custom" type="submit" id="submit">Submit</button>
 							<button class="btn btn-custom" type="reset">Reset</button>
 						</div>
 					</form>
@@ -38,6 +34,10 @@
 			</div>
 		</div>
 		<script>
+			$( "#submit" ).click(function() {
+  				upload()
+			})
+
 			function upload() {
 				var pathname = window.location.pathname
 				var reg = /\/post\/.{24}\//
@@ -47,35 +47,12 @@
 				formData.append('picture', $('#picture')[0].files[0])
 
 				$.ajax({
-					// Your server script to process the upload
 					url: url,
 					type: 'POST',
-
-					// Form data
 					data: formData,
-
-					// Tell jQuery not to process data or worry about content-type
-					// You *must* include these options!
 					cache: false,
 					contentType: false,
 					processData: false,
-
-					// Custom XMLHttpRequest
-					xhr: function () {
-					var myXhr = $.ajaxSettings.xhr()
-					if (myXhr.upload) {
-						// For handling the progress of the upload
-						myXhr.upload.addEventListener('progress', function (e) {
-						if (e.lengthComputable) {
-							$('progress').attr({
-							value: e.loaded,
-							max: e.total,
-							})
-						}
-						}, false)
-					}
-					return myXhr
-					},
 					success: function (data){
 						if(data.error){
 							$('#uploadAlert').text(data.error.message)

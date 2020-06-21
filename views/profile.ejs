@@ -11,71 +11,26 @@
 				<%- include('./partials/navigation')  %> 
 				<div class="row settings-container">
 					<div class="col-md-12">
-						<!-- if -->
+						<% if(userProfile.userId.equals(user._id)){ %> 
 						<div class="row">
 							<div class="col-12 mt-4">
 									<a class="custom-link mt-4" href="/user/editProfile">>Edit Profile</a>
 							</div>
 						</div>
-						<!-- end of if -->
+						<% } %> 
 						<div class="row">
 							<div class="col-md-2 col-6">
-								<img class="blog-img blog-img-inline p-0 py-4" src="/uploads/user/<%= profile.profilePicture %>" width="100" >
+								<img class="blog-img blog-img-inline p-0 py-4" src="/uploads/user/<%= userProfile.profilePicture %>" width="100" >
 							</div>
 							<div class="col-md-10 col-6">
-								<h4 class="py-4"><%= profile.name %> </h4>
+								<h4 class="py-4"><%= userProfile.name %> </h4>
 							</div>
 						</div>
-						<hr class="blue-line-hr">
-						<div class="row mx-3 my-2">
-							<div class="col-6 m-auto">
-								<p>Mail</p>
-							</div>
-							<div class="col-6 text-right">
-								<button class="btn btn-custom" type="submit">Button</button>
-							</div>
-						</div>	
-						<div class="row mx-3 my-2">
-							<div class="col-6 m-auto">
-								<p>Setting 1</p>
-							</div>
-							<div class="col-6 text-right">
-								<button class="btn btn-custom" type="submit">Button</button>
-							</div>
-						</div>	
-						<div class="row mx-3 my-2">
-							<div class="col-6 m-auto">
-								<p>Setting 1</p>
-							</div>
-							<div class="col-6 text-right">
-								<button class="btn btn-custom" type="submit">Button</button>
-							</div>
-						</div>	
-						<hr class="blue-line-hr">
-						<div class="row mx-3 my-2">
-							<div class="col-6 m-auto">
-								<p>Setting 1</p>
-							</div>
-							<div class="col-6 text-right">
-								<button class="btn btn-custom" type="submit">Button</button>
-							</div>
-						</div>
-						<div class="row mx-3 my-2">
-							<div class="col-6 m-auto">
-								<p>Setting 1</p>
-							</div>
-							<div class="col-6 text-right">
-								<button class="btn btn-custom" type="submit">Button</button>
-							</div>
-						</div>
-						<div class="row mx-3 my-2">
-							<div class="col-6 m-auto">
-								<p>Setting 1</p>
-							</div>
-							<div class="col-6 text-right">
-								<button class="btn btn-custom" type="submit">Button</button>
-							</div>
-						</div>
+						<label for="interestedIn">Interests</label>
+						<p><%= userProfile.interestedIn %> </p>
+
+						<label for="bio">Bio</label>
+						<p><%= userProfile.bio %> </p>
 					</div>
 				</div>
 			</div>

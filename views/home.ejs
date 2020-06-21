@@ -52,7 +52,7 @@
 
 		<div id="loginpage" class="modal">
 			<div class="modal-dialog modal-dialog-centered">
-				<form class="modal-content animate" method="POST" action="/login">
+				<form class="modal-content animate" id="loginForm" method="POST" action="/login">
 					<div class="row mx-auto my-4">
 						<h1>Log In</h1>
 					</div>
@@ -63,10 +63,10 @@
 						<input type="password" name="password" id="password" placeholder="password">
 					</div>
 					<div class="row mx-auto my-2">
-						<p class="error-message">invalid pw</p>
+						<p class="error-message"></p>
 					</div>
 					<div class="row mx-auto my-4">
-						<button class="btn btn-primary">Log In</button>
+						<button class="btn btn-primary" id="loginButton">Log In</button>
 					</div>
 				</form>
 			</div>
@@ -74,6 +74,33 @@
 	</div>
 	
 	<script>
+
+		$("#loginButton").click(function(){
+			console.log('func')
+			$.ajax({
+					url: '/login',
+					type: 'POST',
+					data: $('#loginForm').serialize(),
+					success: function (data){
+						if(data.error){
+							$('.error-message').text(data.error.message)
+						}else{
+							$('.error-message').text(data.message)
+						}
+					}
+				})
+		});
+
+		function login(){
+			console.log('login func')
+			$.post('/login', $('#loginForm').serialize())
+				.done(function(data){
+					if(data.error){
+						$('.error-message').text(data.error.message)
+						console.log('err')
+					}
+				})
+		}
 			var regmodal = document.getElementById('regpage');
 			var loginmodal = document.getElementById('loginpage');
 

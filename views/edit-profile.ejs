@@ -17,7 +17,6 @@
 						</div>
 						<form enctype="multipart/form-data">
 							<input id="profilePicture" name="profilePicture" type="file" />
-							<input onclick="uploadProfilePhoto()" type="button" value="Upload" />
 						</form>
 						<div class="col-12 mt-4 mb-2">
 							<label>Email</label>
@@ -28,7 +27,7 @@
 							<input type="text" name="password" placeholder="Password" value="">
 						</div>
 						<div class="col-md-12 mt-2 mb-4">
-							<button class="btn btn-custom" type="submit">Submit</button>
+							<button class="btn btn-custom" type="submit" onclick="uploadProfilePhoto()">Submit</button>
 							<button class="btn btn-custom" type="reset">Reset</button>
 						</div>
 					</form>
