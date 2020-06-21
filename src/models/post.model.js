@@ -9,6 +9,11 @@ var PostSchema = new Schema({
         type: mongoose.Types.ObjectId
     },
 
+    username: {
+        required: true,
+        type: String
+    },
+
     header: {
         required: true,
         default: "New post",
