@@ -9,20 +9,23 @@
 			<div class="container">
 				<%- include('./partials/navigation')  %> 
 				<!-- exchange with editProfile; also exchange the values with the corresponding ones -->
-				<form method="POST", action="/post/<%= post._id %>/editPost ">
+				<form method="POST", action="/user/editProfile">
 				<div class="row blog-teaser">
 						<div class="col-12 mt-4 mb-2">
-							<input type="text" name="username" placeholder="Username" value="<%= post.header %>">
+							<label>Username</label>
+							<input type="text" name="username" placeholder="Username" value="<%= user.username %>">
 						</div>
-						<div class="col-12 mt-2 mb-3">
-							<button class="btn btn-custom btn-img">Choose image</button><span class="label-img">display image name</span>
-							<input class="upload-btn" type="file">
+						<form enctype="multipart/form-data">
+							<input id="profilePicture" name="profilePicture" type="file" />
+							<input onclick="uploadProfilePhoto()" type="button" value="Upload" />
+						</form>
+						<div class="col-12 mt-4 mb-2">
+							<label>Email</label>
+							<input type="mail" name="mail" placeholder="Mail" value="<%= user.email %>">
 						</div>
 						<div class="col-12 mt-4 mb-2">
-							<input type="mail" name="mail" placeholder="Mail" value="<%= post.header %>">
-						</div>
-						<div class="col-12 mt-4 mb-2">
-							<input type="text" name="password" placeholder="Password" value="<%= post.header %>">
+							<label>Password</label>
+							<input type="text" name="password" placeholder="Password" value="">
 						</div>
 						<div class="col-md-12 mt-2 mb-4">
 							<button class="btn btn-custom" type="submit">Submit</button>
@@ -33,9 +36,25 @@
 			</div>
 		</div>
 		<script>
-			function uploadPostPhoto(postId){
-				$.post('/post/' + postId + '/uploadPhoto', function(data){
-					console.log('uploaded')
+			function uploadProfilePhoto(){
+				var formData = new FormData()
+				formData.append('profilePicture', $('#profilePicture')[0].files[0])
+
+				$.ajax({
+					url: '/user/uploadProfilePicture',
+					type: 'POST',
+					data: formData,
+					cache: false,
+					contentType: false,
+					processData: false,
+
+					success: function (data){
+						if(data.error){
+							console.log(data.error.message)
+						}else{
+							console.log(data.message)
+						}
+					}
 				})
 			}
 		</script>
