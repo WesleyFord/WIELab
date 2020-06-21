@@ -13,17 +13,21 @@
                 <% for (const post in posts){ %>
                     <a href="/post/<%= posts[post]._id %>"  target="_blank">
 					<div class="row blog-teaser">
+						<% if(posts[post].picture) {%> 
 						<div class="col-md-8">
+						<% } else { %> 
+						<div class="col-md-12">
+						<% } %>
 							<h2 class="blog-hl"><%=posts[post].header%></h2>
 							<p>
 								<%=posts[post].text%>
 							</p>
 						</div>
-						<div class="col-md-4">
-							<% if(posts[post].picture) {%> 
-							<img class="blog-img" src="/uploads/post/<%= posts[post].picture %> ">
-							<% } %> 
-						</div>
+						<% if(posts[post].picture) {%> 
+							<div class="col-md-4">
+								<img class="blog-img" src="/uploads/post/<%= posts[post].picture %> ">
+							</div>
+						<% } %> 
 					</div>
                 </a>
                 <% } %>
