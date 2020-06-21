@@ -146,7 +146,7 @@ exports.insertComment = (commentInfo, cb) => {
 
         else if(err && err.errors) return cb(new ErrorHandler(400, 'fill_all_required_fields'))
 
-        else return cb(new ErrorHandler(500, 'database_error'))
+        else if (err) return cb(new ErrorHandler(500, 'database_error'))
 
         return cb(null, cmt)
     })
