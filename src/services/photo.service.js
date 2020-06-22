@@ -4,6 +4,8 @@ const ErrorHandler = require('../helpers/error.handler')
 
 exports.uploadUserPhoto = (req, cb) => {
 
+    checkFileStructure()
+
     if(!req.files ||!req.files.profilePicture){
         return cb(new ErrorHandler(400, 'no_files_uploaded'))
     } 
@@ -24,6 +26,8 @@ exports.uploadUserPhoto = (req, cb) => {
 }
 
 exports.uploadPostPhoto = (req, cb) => {
+
+    checkFileStructure()
 
     if(!req.files || !req.files.picture){
         return cb(new ErrorHandler(400, 'no_files_uploaded'))
@@ -52,6 +56,22 @@ exports.deletePhoto = (path, cb) => {
         else return cb(null, true)
     })
 
+}
+
+function checkFileStructure(){
+    const uploadsDir = path.join(__dirname, '../../uploads')
+    const userDir = path.join(__dirname, '../../uploads/user')
+    const postDir = path.join(__dirname, '../../uploads/post')
+
+    if(!fs.existsSync(uploadsDir)){
+        fs.mkdirSync(uploadsDir)
+    }
+    if (!fs.existsSync(userDir)){
+        fs.mkdirSync(userDir)
+    }
+    if(!fs.existsSync(postDir)){
+        fs.mkdirSync(postDir)
+    }
 }
 
 exports.defaultProfilePicture = path.join(__dirname, '../../uploads/user/default.jpg')
