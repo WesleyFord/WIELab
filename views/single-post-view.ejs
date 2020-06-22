@@ -19,7 +19,7 @@
 						<h2 class="blog-hl"><%= post.header %></h2>
 					</div>
 					<div class="col-12">
-						<a href="/users/<%= post.userId %>">Author: <%- post.username %></a>
+						<a href="/users/<%= post.userId %>">Author: <%= post.username %></a>
 					</div>
 					<div class="col-12">
 						<p><%= post.timestamp.toLocaleDateString("en-US") %></p>
