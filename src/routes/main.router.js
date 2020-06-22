@@ -16,11 +16,7 @@ router.use(function isAuthenticated(req, res, next) {
             if (err) return next(err)
 
             if(!profile){
-                req.user.profile = {
-                    userId: req.user._id,
-                    email: req.user.email,
-                    profilePicture: 'default.jpg'
-                }
+                req.user.profile = false
             }
             else {
                 req.user.profile = profile
