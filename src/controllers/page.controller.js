@@ -1,5 +1,6 @@
 const path = require('path')
-const { resolveSoa } = require('dns')
+const dbService = require('../services/database.service')
+const { profile } = require('console')
 
 /*
 ===========
@@ -116,7 +117,13 @@ exports.renderProfileCreate = (req, res, next) => {
 
     //No data needed
 
-    return res.render('create-profile')
+    dbService.findProfile(req.user._id, (err, profile) =>{
+        if (err) return next(err)
+
+        if(profile) return res.redirect('/user')
+
+        return res.render('create-profile', {user: req.user, profile: req.user.profile})
+    })
 }
 
 exports.renderProfileEdit = (req, res, next) => {
