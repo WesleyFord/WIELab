@@ -21,7 +21,7 @@ exports.createProfile = (req, res, next) => {
             
             dbService.updateUser(req.user, {hasProfile: true}, (err, u) => {
                 if(err) return next(err)
-                return res.send({message: 'profile_created', profile: profile})
+                return res.redirect('/user')
             })    
         }
     })

@@ -7,7 +7,8 @@ module.exports = (app) => {
     }, pageController.render404)
 
     app.use((error, req, res, next) => {
-        res.send({
+        if(error.status == 404) return pageController.render404(req, res, next)
+        return res.send({
             error: {
                 status: error.status,
                 message: error.message
