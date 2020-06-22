@@ -30,7 +30,7 @@
 		
 		<div id="regpage" class="modal">
 			<div class="modal-dialog modal-dialog-centered">
-				<form class="modal-content animate" method="POST" action="/register">
+				<form class="modal-content animate" id="register-form">
 					<div class="row mx-auto my-4">
 						<h1>Register</h1>
 					</div>
@@ -43,8 +43,11 @@
 					<div class="row mx-auto my-4">
 						<input type="password" name="password" id="password" placeholder="password">
 					</div>	
+					<div class="row mx-auto my-2">
+						<p id="error-message"></p>
+					</div>
 					<div class="row mx-auto my-4">
-						<button class="btn btn-primary">Sign up!</button>
+						<button class="btn btn-primary" id="register-button">Sign up!</button>
 					</div>
 				</form>
 			</div>
@@ -52,7 +55,7 @@
 
 		<div id="loginpage" class="modal">
 			<div class="modal-dialog modal-dialog-centered">
-				<form class="modal-content animate" id="loginForm" method="POST" action="/login">
+				<form class="modal-content animate" id="login-form">
 					<div class="row mx-auto my-4">
 						<h1>Log In</h1>
 					</div>
@@ -63,10 +66,10 @@
 						<input type="password" name="password" id="password" placeholder="password">
 					</div>
 					<div class="row mx-auto my-2">
-						<p class="error-message"></p>
+						<p id="error-message"></p>
 					</div>
 					<div class="row mx-auto my-4">
-						<button class="btn btn-primary" id="loginButton">Log In</button>
+						<button class="btn btn-primary" id="login-button">Log In</button>
 					</div>
 				</form>
 			</div>
@@ -75,32 +78,38 @@
 	
 	<script>
 
-		$("#loginButton").click(function(){
-			console.log('func')
+		$("#login-button").click(function(e){
+			e.preventDefault()
 			$.ajax({
-					url: '/login',
+					url: '/login/',
 					type: 'POST',
-					data: $('#loginForm').serialize(),
+					data: $('#login-form').serialize(),
 					success: function (data){
 						if(data.error){
-							$('.error-message').text(data.error.message)
+							$('#error-message').html(data.error.message)
 						}else{
-							$('.error-message').text(data.message)
+							window.location.replace('/')
 						}
 					}
 				})
-		});
+		})
 
-		function login(){
-			console.log('login func')
-			$.post('/login', $('#loginForm').serialize())
-				.done(function(data){
-					if(data.error){
-						$('.error-message').text(data.error.message)
-						console.log('err')
+		$("#register-button").click(function(e){
+			e.preventDefault()
+			$.ajax({
+					url: '/register/',
+					type: 'POST',
+					data: $('#register-form').serialize(),
+					success: function (data){
+						if(data.error){
+							$('#error-message').html(data.error.message)
+						}else{
+							$('#error-message').html(data.message)
+						}
 					}
 				})
-		}
+		})
+
 			var regmodal = document.getElementById('regpage');
 			var loginmodal = document.getElementById('loginpage');
 
