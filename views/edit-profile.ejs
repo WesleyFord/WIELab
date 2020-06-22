@@ -8,26 +8,28 @@
 		<div class="container-fluid" id="body">
 			<div class="container">
 				<%- include('./partials/navigation')  %> 
-				<!-- exchange with editProfile; also exchange the values with the corresponding ones -->
+				<h3>Edit Profile</h3>
 				<form method="POST", action="/user/editProfile">
 				<div class="row blog-teaser">
 						<div class="col-12 mt-4 mb-2">
-							<label>Username</label>
-							<input type="text" name="username" placeholder="Username" value="<%= user.username %>">
+							<input type="text" name="name" placeholder="Your name" value="<%= profile.name %> ">
 						</div>
-						<form enctype="multipart/form-data">
-							<input id="profilePicture" name="profilePicture" type="file" />
-						</form>
-						<div class="col-12 mt-4 mb-2">
-							<label>Email</label>
-							<input type="mail" name="mail" placeholder="Mail" value="<%= user.email %>">
+						<div class="col-12 my-2">
+              				<p>Upload Profile Picture</p>
+							<form enctype="multipart/form-data">
+								<input id="profilePicture" name="profilePicture" type="file" />
+								<input type="button" onclick="uploadProfilePicture()" value="Upload">
+							</form>
+							<p id="uploadAlert"></p>
 						</div>
-						<div class="col-12 mt-4 mb-2">
-							<label>Password</label>
-							<input type="text" name="password" placeholder="Password" value="">
+						<div class="col-md-12 my-2">
+							<textarea class="col-md-8 p-1" name="bio" placeholder="Tell us about yourself" value="<%= profile.bio %> "></textarea>
+						</div>
+						<div class="col-md-12 my-2">
+							<input type="text" name="interestedIn" placeholder="Your interests" value="<%= profile.interestedIn %> ">
 						</div>
 						<div class="col-md-12 mt-2 mb-4">
-							<button class="btn btn-custom" type="submit" onclick="uploadProfilePhoto()">Submit</button>
+							<button class="btn btn-custom" type="submit" id="submit">Submit</button>
 							<button class="btn btn-custom" type="reset">Reset</button>
 						</div>
 					</form>
@@ -35,7 +37,7 @@
 			</div>
 		</div>
 		<script>
-			function uploadProfilePhoto(){
+			function uploadProfilePicture(){
 				var formData = new FormData()
 				formData.append('profilePicture', $('#profilePicture')[0].files[0])
 
