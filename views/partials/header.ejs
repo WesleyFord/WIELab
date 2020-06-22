@@ -12,15 +12,8 @@
                     <button class="btn btn-custom" type="submit">Search</button>
                 </form>
             </nav>
-            <div class="my-auto mx-3 custom-profile">
-                <a href="/user">
-                    <% if(!profile){ %> 
-                    <img class="profile-img" src= "/uploads/user/default.jpg">
-                    <% } else { %> 
-                    <img class="profile-img" src= "/uploads/user/<%= profile.profilePicture %>">
-                    <% } %> 
-                    <span> <%= user.username %> </span>
-                </a>
+            <div class="my-auto mx-2 custom-profile">
+                <a href="/user"><% if(!profile){ %><img class="profile-img" src= "/uploads/user/default.jpg"><% } else { %><img class="profile-img" src= "/uploads/user/<%= profile.profilePicture %>"><% } %><span class="pl-1"><%= user.username %></span></a>
             </div>
         </div>
     </div>			

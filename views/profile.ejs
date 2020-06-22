@@ -20,17 +20,26 @@
 						<% } %> 
 						<div class="row">
 							<div class="col-md-2 col-6">
-								<img class="blog-img blog-img-inline p-0 py-4" src="/uploads/user/<%= userProfile.profilePicture %>" width="100" >
+								<img class="p-0 py-4" src="/uploads/user/<%= userProfile.profilePicture %>">
 							</div>
 							<div class="col-md-10 col-6">
-								<h4 class="py-4"><%= userProfile.name %> </h4>
+								<h2 class="py-4"><%= userProfile.name %> </h2>
 							</div>
 						</div>
-						<label for="interestedIn">Interests</label>
-						<p><%= userProfile.interestedIn %> </p>
-
-						<label for="bio">Bio</label>
-						<p><%= userProfile.bio %> </p>
+						<hr class="blue-line-hr">
+						<div class="row">
+							<div class="col-12">
+								<h5>Interests</h5>
+								<p><%= userProfile.interestedIn %></p>
+							</div>
+						</div>
+						<hr class="blue-line-hr">
+						<div class="row">
+							<div class="col-12">
+								<h5>Bio</h5>
+								<p><%= userProfile.bio %></p>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

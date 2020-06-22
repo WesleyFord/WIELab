@@ -11,7 +11,7 @@
 				<div class="row blog-teaser">
 					<div class="col-12">
 						<% if(user._id.equals(post.userId)) { %> 
-							<a class="custom-link" href="/post/<%= post._id %>/editPost">>Edit Post</a>
+							<a class="custom-link pr-3" href="/post/<%= post._id %>/editPost">>Edit Post</a>
 							<a class="custom-link" href="javascript: deletePost()">>Delete Post</a>
 						<% } %> 
 					</div>
@@ -36,19 +36,19 @@
 					</div>
 				</div>	
 				<div class="row blog-teaser">
-					<h2 style="margin:10px">Comments</h2>
-					<form id="commentForm" method="POST" action="/post/<%= post.id %>/comment/writeComment ">
-						<textarea class="form-control" style="margin:10px" name="comment">Enter comment</textarea>
-						<button id="commentSubmit" class="btn btn-primary" style="margin:10px">Submit</button>	
+					<h2 class="col-12 col-lg-3 col-xl-2">Comments</h2>
+					<form class="col-12 col-lg-9 col-xl-19" id="commentForm" method="POST" action="/post/<%= post.id %>/comment/writeComment ">
+						<textarea class="form-control my-2" name="comment">Enter comment</textarea>
+						<button id="commentSubmit" class="btn btn-custom my-2">Submit</button>	
 					</form>
 				</div>
 				<% for (const comment in comments){ %>
 					<div class="row blog-teaser">
-						<a href="/users/<%= comments[comment].userId %> ">
-							<img class="profile-img" src= "/uploads/user/<%= comments[comment].userId %>.jpg" onerror="this.onerror = null; this.src = '/uploads/user/default.jpg'">
-							<span> <%= comments[comment].username %> </span>
-						</a>
-						<p class="col-12"><%= comments[comment].comment %></p>
+						<div class="col-12 my-2">
+							<a class="my-2 custom-link" href="/users/<%= comments[comment].userId %>"><img class="profile-img" src= "/uploads/user/<%= comments[comment].userId %>.jpg" onerror="this.onerror = null; this.src = '/uploads/user/default.jpg'"><span class="pl-1"><%= comments[comment].username %></span></a>
+							<span class="my-2">commented:</span>
+						</div>
+						<p class="col-12 mx-5"><%= comments[comment].comment %></p>
 					</div>
 				<% } %>
 			</div>
