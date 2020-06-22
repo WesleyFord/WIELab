@@ -8,6 +8,7 @@
 		<div class="container-fluid" id="body">
 			<div class="container">
 				<%- include('./partials/navigation')  %> 
+				<h3>Edit Post</h3>
 				<form method="POST", action="/post/<%= post._id %>/editPost ">
 				<div class="row blog-teaser">
 						<div class="col-12 mt-4 mb-2">
@@ -16,6 +17,7 @@
 						<div class="col-12 my-2">
 							<form enctype="multipart/form-data">
 								<input id="picture" name="picture" type="file" />
+								<input type="button" onclick="uploadPostPicture()" value="Upload">
 							</form>
 							<p id="uploadAlert"></p>
 						</div>
@@ -34,11 +36,8 @@
 			</div>
 		</div>
 		<script>
-			$( "#submit" ).click(function() {
-  				upload()
-			})
 
-			function upload() {
+			function uploadPostPicture() {
 				var pathname = window.location.pathname
 				var reg = /\/post\/.{24}\//
 				var url = pathname.match(reg)[0] + 'uploadPhoto'
