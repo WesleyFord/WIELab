@@ -8,9 +8,13 @@
 		<div class="container-fluid" id="body">
 			<div class="container">
 				<%- include('./partials/navigation')  %> 
-				<h3>Edit Post</h3>
+				<div class="row">
+					<div class="col-12 mt-4">
+						<h3>Edit Post</h3>
+					</div>
+				</div>
 				<form method="POST", action="/post/<%= post._id %>/editPost ">
-				<div class="row blog-teaser">
+				<div class="row block-border">
 						<div class="col-12 mt-4 mb-2">
 							<input type="text" name="header" placeholder="Headline" value="<%= post.header %>">
 						</div>
