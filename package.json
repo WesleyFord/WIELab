@@ -20,7 +20,7 @@
     "fuse.js": "^6.0.4",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.11",
-    "nodemailer": "^6.4.8",
+    "nodemailer": "^6.4.16",
     "number-is-nan": "^2.0.0",
     "os-homedir": "^2.0.0",
     "passport": "^0.4.1",
